@@ -17,6 +17,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { companyService } from '@/services/companyService';
 import { CompanyModel, CompanyOfficeLocation } from '@/types/company';
 import { ROUTES } from '@/utils/constants';
+import { formatAuthErrorMessage } from '@/utils/errors';
 
 const INDUSTRIES = [
   'IT & Services',
@@ -248,7 +249,7 @@ export const EditCompanyPage: React.FC = () => {
       }, 1200);
     } catch (err: unknown) {
       console.error('Error updating company:', err);
-      setError(err instanceof Error ? err.message : 'Failed to update company profile.');
+      setError(formatAuthErrorMessage(err));
     } finally {
       setSaving(false);
     }

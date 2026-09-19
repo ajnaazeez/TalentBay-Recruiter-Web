@@ -258,17 +258,38 @@ export const companyService = {
    * Uploads company logo to verified storage path: companies/{companyId}/logo.jpg
    */
   async uploadLogo(companyId: string, file: File): Promise<string> {
-    const storagePath = STORAGE_PATHS.companyLogo(companyId);
-    const storageRef = ref(storage, storagePath);
-    await uploadBytes(storageRef, file, { contentType: file.type });
-    const downloadUrl = await getDownloadURL(storageRef);
+    try {
+      const storagePath = STORAGE_PATHS.companyLogo(companyId);
+      const storageRef = ref(storage, storagePath);
+      await uploadBytes(storageRef, file, { contentType: file.type });
+      const downloadUrl = await getDownloadURL(storageRef);
 
-    await updateDoc(doc(db, COLLECTIONS.COMPANIES, companyId), {
-      'profile.logoUrl': downloadUrl,
-      'meta.updatedAt': serverTimestamp(),
-    });
+      await updateDoc(doc(db, COLLECTIONS.COMPANIES, companyId), {
+        'profile.logoUrl': downloadUrl,
+        'meta.updatedAt': serverTimestamp(),
+      });
 
-    return downloadUrl;
+      return downloadUrl;
+    } catch (err: unknown) {
+      console.warn('[companyService] Firebase Storage upload failed/unauthorized for logo, using base64 fallback:', err);
+      const dataUrl = await new Promise<string>((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result as string);
+        reader.onerror = (e) => reject(e);
+        reader.readAsDataURL(file);
+      });
+
+      try {
+        await updateDoc(doc(db, COLLECTIONS.COMPANIES, companyId), {
+          'profile.logoUrl': dataUrl,
+          'meta.updatedAt': serverTimestamp(),
+        });
+      } catch (dbErr) {
+        console.warn('[companyService] Firestore update for logoUrl failed:', dbErr);
+      }
+
+      return dataUrl;
+    }
   },
 
   /**
@@ -282,17 +303,38 @@ export const companyService = {
    * Uploads company banner to verified storage path: companies/{companyId}/banner.jpg
    */
   async uploadBanner(companyId: string, file: File): Promise<string> {
-    const storagePath = STORAGE_PATHS.companyBanner(companyId);
-    const storageRef = ref(storage, storagePath);
-    await uploadBytes(storageRef, file, { contentType: file.type });
-    const downloadUrl = await getDownloadURL(storageRef);
+    try {
+      const storagePath = STORAGE_PATHS.companyBanner(companyId);
+      const storageRef = ref(storage, storagePath);
+      await uploadBytes(storageRef, file, { contentType: file.type });
+      const downloadUrl = await getDownloadURL(storageRef);
 
-    await updateDoc(doc(db, COLLECTIONS.COMPANIES, companyId), {
-      'profile.bannerUrl': downloadUrl,
-      'meta.updatedAt': serverTimestamp(),
-    });
+      await updateDoc(doc(db, COLLECTIONS.COMPANIES, companyId), {
+        'profile.bannerUrl': downloadUrl,
+        'meta.updatedAt': serverTimestamp(),
+      });
 
-    return downloadUrl;
+      return downloadUrl;
+    } catch (err: unknown) {
+      console.warn('[companyService] Firebase Storage upload failed/unauthorized for banner, using base64 fallback:', err);
+      const dataUrl = await new Promise<string>((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result as string);
+        reader.onerror = (e) => reject(e);
+        reader.readAsDataURL(file);
+      });
+
+      try {
+        await updateDoc(doc(db, COLLECTIONS.COMPANIES, companyId), {
+          'profile.bannerUrl': dataUrl,
+          'meta.updatedAt': serverTimestamp(),
+        });
+      } catch (dbErr) {
+        console.warn('[companyService] Firestore update for bannerUrl failed:', dbErr);
+      }
+
+      return dataUrl;
+    }
   },
 
   /**

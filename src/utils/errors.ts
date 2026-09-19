@@ -52,7 +52,27 @@ function mapCodeOrMessage(code: string, msg: string): string {
     combined.includes('phone number is already registered') ||
     combined.includes('already exists with this phone number')
   ) {
-    return 'This phone number is already registered. Please sign in instead.';
+    return 'An account already exists with this phone number. Please sign in instead.';
+  }
+
+  // Firebase Storage Errors
+  if (
+    combined.includes('storage/unauthorized') ||
+    combined.includes('user does not have permission to access')
+  ) {
+    return 'Permission denied when accessing Firebase Storage. Please check storage rules or permissions.';
+  }
+
+  if (combined.includes('storage/quota-exceeded')) {
+    return 'Firebase Storage quota exceeded. Please contact support.';
+  }
+
+  if (combined.includes('storage/canceled')) {
+    return 'Upload was canceled.';
+  }
+
+  if (combined.includes('storage/object-not-found')) {
+    return 'File does not exist in storage.';
   }
 
   if (
@@ -95,14 +115,14 @@ function mapCodeOrMessage(code: string, msg: string): string {
     combined.includes('auth/user-not-found') ||
     combined.includes('user-not-found')
   ) {
-    return 'No recruiter account found with this email. Please create an account first.';
+    return 'No recruiter account found with this email. Invalid email or password.';
   }
 
   if (
     combined.includes('auth/wrong-password') ||
     combined.includes('wrong-password')
   ) {
-    return 'Incorrect password. Please verify your credentials and try again.';
+    return 'Incorrect password. Invalid email or password.';
   }
 
   if (
