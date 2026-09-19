@@ -1,0 +1,2013 @@
+{
+  "targetEmail": "fathimaajna33@gmail.com",
+  "targetPhone": "7306420827",
+  "totalIdentifiedUids": 45,
+  "uids": [
+    {
+      "uid": "zMNGYmfTeiQixK2o8QMyMXso8Xn2",
+      "accountClassification": "PHONE_AUTH_USER",
+      "auth": {
+        "exists": true,
+        "email": null,
+        "phone": "+917306420827",
+        "displayName": null,
+        "providers": [
+          "phone"
+        ],
+        "createdAt": "2026-09-18T10:06:18.481Z",
+        "lastLoginAt": "2026-09-18T10:07:10.257Z"
+      },
+      "usersDoc": {
+        "exists": true,
+        "email": "fathimaajna33@mail.com",
+        "phone": "+917306420827",
+        "role": "recruiter",
+        "companyId": "1789570400461",
+        "createdAt": "2026-09-18T10:06:22.972421Z",
+        "updatedAt": "2026-09-18T10:07:13.460646Z"
+      },
+      "recruitersDoc": {
+        "exists": true,
+        "fullName": "alsha",
+        "officialEmail": "fathimaajna33@mail.com",
+        "phone": "+917306420827",
+        "companyId": "1789570400461",
+        "isSubscribed": false,
+        "subscriptionPlanId": null,
+        "createdAt": "2026-09-18T10:06:22.972421Z",
+        "updatedAt": "2026-09-18T10:07:13.460646Z"
+      },
+      "candidatesDoc": {
+        "exists": false
+      },
+      "linkedData": {
+        "razorpayOrders": [],
+        "paymentTransactions": []
+      }
+    },
+    {
+      "uid": "1CMPAtZyz1TBAjH0xPunPzu9Iun2",
+      "accountClassification": "ORPHANED_AUTH_USER (Firestore docs deleted)",
+      "auth": {
+        "exists": true,
+        "email": "jesnacj26@gmail.com",
+        "phone": "+919036832003",
+        "displayName": "jesna cj",
+        "providers": [
+          "phone",
+          "password"
+        ],
+        "createdAt": "2026-03-02T00:03:40.404Z",
+        "lastLoginAt": "2026-03-02T00:03:40.404Z"
+      },
+      "usersDoc": {
+        "exists": false
+      },
+      "recruitersDoc": {
+        "exists": false
+      },
+      "candidatesDoc": {
+        "exists": false
+      },
+      "linkedData": {
+        "razorpayOrders": [],
+        "paymentTransactions": []
+      }
+    },
+    {
+      "uid": "3FTGJO7IvVR1QrcZVcGNMRx96CW2",
+      "accountClassification": "ACTIVE",
+      "auth": {
+        "exists": true,
+        "email": "suhaib.vp@pdd.com",
+        "phone": null,
+        "displayName": "Suhaib",
+        "providers": [
+          "password"
+        ],
+        "createdAt": "2026-09-16T16:44:48.471Z",
+        "lastLoginAt": "2026-09-16T16:50:05.255Z"
+      },
+      "usersDoc": {
+        "exists": true,
+        "email": "suhaib.vp@pdd.com",
+        "phone": "+919895162766",
+        "role": "recruiter",
+        "companyId": null,
+        "createdAt": "2026-09-16T16:44:50.448178Z",
+        "updatedAt": "2026-09-16T16:44:50.448178Z"
+      },
+      "recruitersDoc": {
+        "exists": true,
+        "fullName": "Suhaib",
+        "officialEmail": "suhaib.vp@pdd.com",
+        "phone": "+919895162766",
+        "companyId": "1789577089736",
+        "isSubscribed": false,
+        "subscriptionPlanId": null,
+        "createdAt": "2026-09-16T16:44:50.678620Z",
+        "updatedAt": "2026-09-16T16:44:50.678620Z"
+      },
+      "candidatesDoc": {
+        "exists": false
+      },
+      "linkedData": {
+        "razorpayOrders": [],
+        "paymentTransactions": []
+      }
+    },
+    {
+      "uid": "3VO90Gk5REfpeP5YVfC1TvnEvSE2",
+      "accountClassification": "ACTIVE",
+      "auth": {
+        "exists": true,
+        "email": "mohammedadnan@gmail.com",
+        "phone": "+915678901234",
+        "displayName": null,
+        "providers": [
+          "phone",
+          "password"
+        ],
+        "createdAt": "2026-05-21T04:57:25.750Z",
+        "lastLoginAt": "2026-05-21T04:57:28.107Z"
+      },
+      "usersDoc": {
+        "exists": true,
+        "email": "mohammedadnan@gmail.com",
+        "phone": null,
+        "role": "candidate",
+        "companyId": null,
+        "createdAt": "2026-05-21T04:57:27.713068Z",
+        "updatedAt": "2026-05-21T04:57:27.713068Z"
+      },
+      "recruitersDoc": {
+        "exists": false
+      },
+      "candidatesDoc": {
+        "exists": true,
+        "fullName": null,
+        "email": "mohammedadnan@gmail.com",
+        "phone": "+915678901234"
+      },
+      "linkedData": {
+        "razorpayOrders": [],
+        "paymentTransactions": []
+      }
+    },
+    {
+      "uid": "61pOSj1zDygLGnA0TsFEBRg5uo22",
+      "accountClassification": "ACTIVE",
+      "auth": {
+        "exists": true,
+        "email": "kuttasheryasif10@gmail.com",
+        "phone": null,
+        "displayName": null,
+        "providers": [
+          "password"
+        ],
+        "createdAt": "2026-02-11T06:04:02.249Z",
+        "lastLoginAt": "2026-02-11T07:00:09.237Z"
+      },
+      "usersDoc": {
+        "exists": true,
+        "email": "kuttasheryasif10@gmail.com",
+        "phone": null,
+        "role": "candidate",
+        "companyId": null,
+        "createdAt": "2026-02-11T06:04:04.111031Z",
+        "updatedAt": "2026-02-11T06:04:04.111031Z"
+      },
+      "recruitersDoc": {
+        "exists": false
+      },
+      "candidatesDoc": {
+        "exists": true,
+        "fullName": null,
+        "email": "kuttasheryasif10@gmail.com",
+        "phone": null
+      },
+      "linkedData": {
+        "razorpayOrders": [],
+        "paymentTransactions": []
+      }
+    },
+    {
+      "uid": "6v9a5rBYAjQknYtwWZtrdCRSNdt2",
+      "accountClassification": "ORPHANED_AUTH_USER (Firestore docs deleted)",
+      "auth": {
+        "exists": true,
+        "email": "ashiq721@outlook.com",
+        "phone": "+917907838523",
+        "displayName": "ashiq",
+        "providers": [
+          "phone",
+          "password"
+        ],
+        "createdAt": "2026-02-28T14:17:45.095Z",
+        "lastLoginAt": "2026-02-28T14:17:45.099Z"
+      },
+      "usersDoc": {
+        "exists": false
+      },
+      "recruitersDoc": {
+        "exists": false
+      },
+      "candidatesDoc": {
+        "exists": false
+      },
+      "linkedData": {
+        "razorpayOrders": [],
+        "paymentTransactions": []
+      }
+    },
+    {
+      "uid": "75ESiNLVQcObqYSsx3znsL9R2DD2",
+      "accountClassification": "ACTIVE",
+      "auth": {
+        "exists": true,
+        "email": "noushukalathil7@gmail.com",
+        "phone": "+917736724705",
+        "displayName": "Noushad",
+        "providers": [
+          "phone",
+          "password"
+        ],
+        "createdAt": "2026-04-30T06:00:00.578Z",
+        "lastLoginAt": "2026-07-02T05:54:06.107Z"
+      },
+      "usersDoc": {
+        "exists": true,
+        "email": "noushukalathil7@gmail.com",
+        "phone": null,
+        "role": "recruiter",
+        "companyId": null,
+        "createdAt": "2026-04-30T06:02:07.538841Z",
+        "updatedAt": "2026-04-30T06:02:07.538841Z"
+      },
+      "recruitersDoc": {
+        "exists": true,
+        "fullName": "Noushad",
+        "officialEmail": "noushukalathil7@gmail.com",
+        "phone": "+917736724705",
+        "companyId": "1777528926607",
+        "isSubscribed": false,
+        "subscriptionPlanId": null,
+        "createdAt": "2026-04-30T06:02:07.538841Z",
+        "updatedAt": "2026-04-30T06:02:07.538841Z"
+      },
+      "candidatesDoc": {
+        "exists": false
+      },
+      "linkedData": {
+        "razorpayOrders": [],
+        "paymentTransactions": []
+      }
+    },
+    {
+      "uid": "8BwWUAwojwb8QPmC7EoG271eDNX2",
+      "accountClassification": "ACTIVE",
+      "auth": {
+        "exists": true,
+        "email": "waqttixdev@gmail.com",
+        "phone": "+919745167677",
+        "displayName": "Waqttix LLP",
+        "providers": [
+          "phone",
+          "password"
+        ],
+        "createdAt": "2026-03-02T06:38:46.313Z",
+        "lastLoginAt": "2026-09-17T09:09:52.928Z"
+      },
+      "usersDoc": {
+        "exists": true,
+        "email": "waqttixdev@gmail.com",
+        "phone": null,
+        "role": "recruiter",
+        "companyId": null,
+        "createdAt": "2026-03-02T06:40:05.509579Z",
+        "updatedAt": "2026-03-02T06:40:05.509579Z"
+      },
+      "recruitersDoc": {
+        "exists": true,
+        "fullName": "Ashiq Rahman",
+        "officialEmail": "waqttixdev@gmail.com",
+        "phone": "+919745167677",
+        "companyId": "1772433605150",
+        "isSubscribed": true,
+        "subscriptionPlanId": "yearly_17089",
+        "createdAt": "2026-03-02T06:40:05.509579Z",
+        "updatedAt": "2026-09-17T09:09:53.856197Z"
+      },
+      "candidatesDoc": {
+        "exists": false
+      },
+      "linkedData": {
+        "razorpayOrders": [],
+        "paymentTransactions": []
+      }
+    },
+    {
+      "uid": "8IwprXcRZDNEz2X1UT8sCRz1rIF3",
+      "accountClassification": "ACTIVE",
+      "auth": {
+        "exists": true,
+        "email": "tomhanks@gmail.com",
+        "phone": "+912468097531",
+        "displayName": "Tom Hanks",
+        "providers": [
+          "phone",
+          "password"
+        ],
+        "createdAt": "2026-05-23T04:11:56.136Z",
+        "lastLoginAt": "2026-05-23T04:11:56.136Z"
+      },
+      "usersDoc": {
+        "exists": true,
+        "email": "tomhanks@gmail.com",
+        "phone": null,
+        "role": "recruiter",
+        "companyId": null,
+        "createdAt": "2026-05-23T04:14:25.913078Z",
+        "updatedAt": "2026-05-23T04:14:25.913078Z"
+      },
+      "recruitersDoc": {
+        "exists": true,
+        "fullName": "Tom Hanks",
+        "officialEmail": "tomhanks@gmail.com",
+        "phone": "+912468097531",
+        "companyId": "1779509665403",
+        "isSubscribed": true,
+        "subscriptionPlanId": "trial_60_days_1_rupee",
+        "createdAt": "2026-05-23T04:14:25.913078Z",
+        "updatedAt": "2026-05-23T04:16:57.093396Z"
+      },
+      "candidatesDoc": {
+        "exists": false
+      },
+      "linkedData": {
+        "razorpayOrders": [],
+        "paymentTransactions": []
+      }
+    },
+    {
+      "uid": "8U1X129HUbUhe0x21sPZQVSi7fo1",
+      "accountClassification": "ACTIVE",
+      "auth": {
+        "exists": true,
+        "email": "muhammedrahees@gmail.com",
+        "phone": null,
+        "displayName": null,
+        "providers": [
+          "password"
+        ],
+        "createdAt": "2026-03-30T05:34:54.509Z",
+        "lastLoginAt": "2026-03-30T05:34:54.509Z"
+      },
+      "usersDoc": {
+        "exists": true,
+        "email": "muhammedrahees@gmail.com",
+        "phone": null,
+        "role": "candidate",
+        "companyId": null,
+        "createdAt": "2026-03-30T05:34:56.031923Z",
+        "updatedAt": "2026-03-30T05:34:56.031923Z"
+      },
+      "recruitersDoc": {
+        "exists": false
+      },
+      "candidatesDoc": {
+        "exists": true,
+        "fullName": null,
+        "email": "muhammedrahees@gmail.com",
+        "phone": null
+      },
+      "linkedData": {
+        "razorpayOrders": [],
+        "paymentTransactions": []
+      }
+    },
+    {
+      "uid": "8ifV6HUC5bQr7AdUBYlV4jT1cqE3",
+      "accountClassification": "ACTIVE",
+      "auth": {
+        "exists": true,
+        "email": "test@gmail.com",
+        "phone": null,
+        "displayName": null,
+        "providers": [
+          "password"
+        ],
+        "createdAt": "2026-06-06T09:53:49.935Z",
+        "lastLoginAt": "2026-06-06T09:53:49.935Z"
+      },
+      "usersDoc": {
+        "exists": true,
+        "email": "test@gmail.com",
+        "phone": null,
+        "role": "candidate",
+        "companyId": null,
+        "createdAt": "2026-06-06T09:53:52.526949Z",
+        "updatedAt": "2026-06-06T09:53:52.526949Z"
+      },
+      "recruitersDoc": {
+        "exists": false
+      },
+      "candidatesDoc": {
+        "exists": true,
+        "fullName": null,
+        "email": "test@gmail.com",
+        "phone": null
+      },
+      "linkedData": {
+        "razorpayOrders": [],
+        "paymentTransactions": []
+      }
+    },
+    {
+      "uid": "B0LOLnI9XeSj7uc7hHZ15AqJHs93",
+      "accountClassification": "ACTIVE",
+      "auth": {
+        "exists": true,
+        "email": "eldhobyju123@gmail.com",
+        "phone": null,
+        "displayName": null,
+        "providers": [
+          "password"
+        ],
+        "createdAt": "2026-02-23T11:10:57.705Z",
+        "lastLoginAt": "2026-02-23T11:10:57.705Z"
+      },
+      "usersDoc": {
+        "exists": true,
+        "email": "eldhobyju123@gmail.com",
+        "phone": null,
+        "role": "candidate",
+        "companyId": null,
+        "createdAt": "2026-02-23T11:11:00.070375Z",
+        "updatedAt": "2026-02-23T11:11:00.070375Z"
+      },
+      "recruitersDoc": {
+        "exists": false
+      },
+      "candidatesDoc": {
+        "exists": true,
+        "fullName": null,
+        "email": "eldhobyju123@gmail.com",
+        "phone": null
+      },
+      "linkedData": {
+        "razorpayOrders": [],
+        "paymentTransactions": []
+      }
+    },
+    {
+      "uid": "EvLLOMQtCZXLTelfNJZ3Zazt6My2",
+      "accountClassification": "PHONE_ALIAS_COLLISION (Re-used phone on different email)",
+      "auth": {
+        "exists": true,
+        "email": "fathimaajna33@mail.com",
+        "phone": null,
+        "displayName": "alsha",
+        "providers": [
+          "password"
+        ],
+        "createdAt": "2026-09-16T14:53:19.006Z",
+        "lastLoginAt": "2026-09-16T14:53:19.006Z"
+      },
+      "usersDoc": {
+        "exists": true,
+        "email": "fathimaajna33@mail.com",
+        "phone": "+917306420827",
+        "role": "recruiter",
+        "companyId": null,
+        "createdAt": "2026-09-16T14:53:20.967943Z",
+        "updatedAt": "2026-09-16T14:53:20.967943Z"
+      },
+      "recruitersDoc": {
+        "exists": true,
+        "fullName": "alsha",
+        "officialEmail": "fathimaajna33@mail.com",
+        "phone": "+917306420827",
+        "companyId": "1789570400461",
+        "isSubscribed": false,
+        "subscriptionPlanId": null,
+        "createdAt": "2026-09-16T14:53:21.233375Z",
+        "updatedAt": "2026-09-16T14:53:21.233375Z"
+      },
+      "candidatesDoc": {
+        "exists": false
+      },
+      "linkedData": {
+        "razorpayOrders": [],
+        "paymentTransactions": []
+      }
+    },
+    {
+      "uid": "FCdkWOHMu2ZJYdE48CGLZ0AKdTG2",
+      "accountClassification": "EMAIL_AUTH_USER",
+      "auth": {
+        "exists": true,
+        "email": "fathimaajna33@gmail.com",
+        "phone": null,
+        "displayName": "Ajna",
+        "providers": [
+          "password"
+        ],
+        "createdAt": "2026-09-16T13:39:03.388Z",
+        "lastLoginAt": "2026-09-16T13:53:31.223Z"
+      },
+      "usersDoc": {
+        "exists": true,
+        "email": "fathimaajna33@gmail.com",
+        "phone": "7306420827",
+        "role": "recruiter",
+        "companyId": null,
+        "createdAt": "2026-09-16T13:39:10.189357Z",
+        "updatedAt": "2026-09-16T13:39:10.189357Z"
+      },
+      "recruitersDoc": {
+        "exists": true,
+        "fullName": "Ajna",
+        "officialEmail": "fathimaajna33@gmail.com",
+        "phone": "7306420827",
+        "companyId": "1789565949759",
+        "isSubscribed": false,
+        "subscriptionPlanId": null,
+        "createdAt": "2026-09-16T13:39:10.529012Z",
+        "updatedAt": "2026-09-16T13:39:10.529012Z"
+      },
+      "candidatesDoc": {
+        "exists": false
+      },
+      "linkedData": {
+        "razorpayOrders": [],
+        "paymentTransactions": []
+      }
+    },
+    {
+      "uid": "H8ViR7IR3nbXWEeindO1bNvEPtj1",
+      "accountClassification": "ACTIVE",
+      "auth": {
+        "exists": true,
+        "email": "abdullaraufputhenpurakkal@gmail.com",
+        "phone": "+918606600280",
+        "displayName": "Abdulla Rauf",
+        "providers": [
+          "phone",
+          "password"
+        ],
+        "createdAt": "2026-03-28T05:57:23.259Z",
+        "lastLoginAt": "2026-08-26T07:46:47.252Z"
+      },
+      "usersDoc": {
+        "exists": true,
+        "email": "abdullaraufputhenpurakkal@gmail.com",
+        "phone": null,
+        "role": "recruiter",
+        "companyId": null,
+        "createdAt": "2026-03-28T05:59:04.196351Z",
+        "updatedAt": "2026-03-28T05:59:04.196351Z"
+      },
+      "recruitersDoc": {
+        "exists": true,
+        "fullName": "Abdulla Rauf PP",
+        "officialEmail": "abdullaraufputhenpurakkal@gmail.com",
+        "phone": "+918606600280",
+        "companyId": "1774677539743",
+        "isSubscribed": true,
+        "subscriptionPlanId": "trial_60_days_1_rupee",
+        "createdAt": "2026-03-28T05:59:04.196351Z",
+        "updatedAt": "2026-04-10T05:29:59.362041Z"
+      },
+      "candidatesDoc": {
+        "exists": false
+      },
+      "linkedData": {
+        "razorpayOrders": [],
+        "paymentTransactions": []
+      }
+    },
+    {
+      "uid": "HK7ijc8vFkOZoGik3zNW4XIXZ173",
+      "accountClassification": "PHONE_ALIAS_COLLISION (Re-used phone on different email)",
+      "auth": {
+        "exists": true,
+        "email": "fathimaajn33@gmail.com",
+        "phone": null,
+        "displayName": "Ajna",
+        "providers": [
+          "password"
+        ],
+        "createdAt": "2026-09-16T15:10:28.271Z",
+        "lastLoginAt": "2026-09-16T15:10:28.271Z"
+      },
+      "usersDoc": {
+        "exists": true,
+        "email": "fathimaajn33@gmail.com",
+        "phone": "+917306420827",
+        "role": "recruiter",
+        "companyId": null,
+        "createdAt": "2026-09-16T15:10:30.635932Z",
+        "updatedAt": "2026-09-16T15:10:30.635932Z"
+      },
+      "recruitersDoc": {
+        "exists": true,
+        "fullName": "Ajna",
+        "officialEmail": "fathimaajn33@gmail.com",
+        "phone": "+917306420827",
+        "companyId": "1789571430006",
+        "isSubscribed": false,
+        "subscriptionPlanId": null,
+        "createdAt": "2026-09-16T15:10:31.017587Z",
+        "updatedAt": "2026-09-16T15:10:31.017587Z"
+      },
+      "candidatesDoc": {
+        "exists": false
+      },
+      "linkedData": {
+        "razorpayOrders": [],
+        "paymentTransactions": []
+      }
+    },
+    {
+      "uid": "HbhRvJcsXfMvynyUjs7DajXhJfu2",
+      "accountClassification": "ACTIVE",
+      "auth": {
+        "exists": true,
+        "email": "ashifamashifa@gmail.com",
+        "phone": "+917907381590",
+        "displayName": "Asifa k",
+        "providers": [
+          "phone",
+          "password"
+        ],
+        "createdAt": "2026-04-18T04:41:51.098Z",
+        "lastLoginAt": "2026-04-18T04:41:51.098Z"
+      },
+      "usersDoc": {
+        "exists": true,
+        "email": "ashifamashifa@gmail.com",
+        "phone": null,
+        "role": "recruiter",
+        "companyId": null,
+        "createdAt": "2026-04-18T13:24:44.251210Z",
+        "updatedAt": "2026-04-18T13:24:44.251210Z"
+      },
+      "recruitersDoc": {
+        "exists": true,
+        "fullName": "john doe",
+        "officialEmail": "ashifamashifa@gmail.com",
+        "phone": "+917907381590",
+        "companyId": "1776518683785",
+        "isSubscribed": true,
+        "subscriptionPlanId": "trial_60_days_1_rupee",
+        "createdAt": "2026-04-18T13:24:44.251210Z",
+        "updatedAt": "2026-04-22T06:44:43.321701Z"
+      },
+      "candidatesDoc": {
+        "exists": false
+      },
+      "linkedData": {
+        "razorpayOrders": [],
+        "paymentTransactions": []
+      }
+    },
+    {
+      "uid": "Ll0ImPvJzEOjxvGp51UAAwRq2fP2",
+      "accountClassification": "ACTIVE",
+      "auth": {
+        "exists": true,
+        "email": "devitejaswi1224@gmail.com",
+        "phone": "+918074616184",
+        "displayName": null,
+        "providers": [
+          "phone",
+          "password"
+        ],
+        "createdAt": "2026-02-13T05:29:38.065Z",
+        "lastLoginAt": "2026-02-16T06:32:11.075Z"
+      },
+      "usersDoc": {
+        "exists": true,
+        "email": "devitejaswi1224@gmail.com",
+        "phone": null,
+        "role": "candidate",
+        "companyId": null,
+        "createdAt": "2026-02-13T05:29:40.130852Z",
+        "updatedAt": "2026-02-13T05:29:40.130852Z"
+      },
+      "recruitersDoc": {
+        "exists": false
+      },
+      "candidatesDoc": {
+        "exists": true,
+        "fullName": null,
+        "email": "devitejaswi1224@gmail.com",
+        "phone": "+918074616184"
+      },
+      "linkedData": {
+        "razorpayOrders": [],
+        "paymentTransactions": []
+      }
+    },
+    {
+      "uid": "N416NzXBsEYSsIu2pqfvV5zqfYk1",
+      "accountClassification": "ACTIVE",
+      "auth": {
+        "exists": true,
+        "email": "test@test.com",
+        "phone": null,
+        "displayName": null,
+        "providers": [
+          "password"
+        ],
+        "createdAt": "2026-05-06T05:40:13.227Z",
+        "lastLoginAt": "2026-05-06T05:40:13.227Z"
+      },
+      "usersDoc": {
+        "exists": true,
+        "email": "test@test.com",
+        "phone": null,
+        "role": "candidate",
+        "companyId": null,
+        "createdAt": "2026-05-06T05:40:14.294043Z",
+        "updatedAt": "2026-05-06T05:40:14.294043Z"
+      },
+      "recruitersDoc": {
+        "exists": false
+      },
+      "candidatesDoc": {
+        "exists": true,
+        "fullName": null,
+        "email": "test@test.com",
+        "phone": null
+      },
+      "linkedData": {
+        "razorpayOrders": [],
+        "paymentTransactions": []
+      }
+    },
+    {
+      "uid": "Q2HPHboh5hTCQldjogjc0WuCmuu2",
+      "accountClassification": "ACTIVE",
+      "auth": {
+        "exists": true,
+        "email": "malvikahoejimin@gmail.com",
+        "phone": "+919037300962",
+        "displayName": "Malavika",
+        "providers": [
+          "phone",
+          "password"
+        ],
+        "createdAt": "2026-04-28T05:40:20.805Z",
+        "lastLoginAt": "2026-04-28T05:40:20.805Z"
+      },
+      "usersDoc": {
+        "exists": true,
+        "email": "Malvikahoejimin@gmail.com",
+        "phone": null,
+        "role": "recruiter",
+        "companyId": null,
+        "createdAt": "2026-04-28T05:41:32.570229Z",
+        "updatedAt": "2026-04-28T05:41:32.570229Z"
+      },
+      "recruitersDoc": {
+        "exists": true,
+        "fullName": "Malavika",
+        "officialEmail": "Malvikahoejimin@gmail.com",
+        "phone": "+919037300962",
+        "companyId": "1777354891397",
+        "isSubscribed": true,
+        "subscriptionPlanId": "monthly_1499",
+        "createdAt": "2026-04-28T05:41:32.570229Z",
+        "updatedAt": "2026-05-07T04:26:57.160622Z"
+      },
+      "candidatesDoc": {
+        "exists": false
+      },
+      "linkedData": {
+        "razorpayOrders": [],
+        "paymentTransactions": []
+      }
+    },
+    {
+      "uid": "QKuJA9G2igTUtbBIz60a97PxY9R2",
+      "accountClassification": "ACTIVE",
+      "auth": {
+        "exists": true,
+        "email": null,
+        "phone": "+916282658542",
+        "displayName": null,
+        "providers": [
+          "phone"
+        ],
+        "createdAt": "2026-09-16T17:15:59.033Z",
+        "lastLoginAt": "2026-09-18T09:15:38.822Z"
+      },
+      "usersDoc": {
+        "exists": true,
+        "email": null,
+        "phone": "+916282658542",
+        "role": "candidate",
+        "companyId": null,
+        "createdAt": "2026-09-17T14:02:07.773484Z",
+        "updatedAt": "2026-09-17T14:02:07.852328Z"
+      },
+      "recruitersDoc": {
+        "exists": false
+      },
+      "candidatesDoc": {
+        "exists": true,
+        "fullName": null,
+        "email": null,
+        "phone": "+916282658542"
+      },
+      "linkedData": {
+        "razorpayOrders": [],
+        "paymentTransactions": []
+      }
+    },
+    {
+      "uid": "U37BWiAqO7PsfdsVyP9v7eaSOIk2",
+      "accountClassification": "ACTIVE",
+      "auth": {
+        "exists": true,
+        "email": "testmail9876123456789@gmail.com",
+        "phone": null,
+        "displayName": null,
+        "providers": [
+          "password"
+        ],
+        "createdAt": "2026-08-19T15:48:19.617Z",
+        "lastLoginAt": "2026-09-04T12:06:43.991Z"
+      },
+      "usersDoc": {
+        "exists": true,
+        "email": "testmail9876123456789@gmail.com",
+        "phone": null,
+        "role": "candidate",
+        "companyId": null,
+        "createdAt": "2026-08-22T08:28:05.705929Z",
+        "updatedAt": "2026-08-28T08:22:07.350038Z"
+      },
+      "recruitersDoc": {
+        "exists": false
+      },
+      "candidatesDoc": {
+        "exists": true,
+        "fullName": null,
+        "email": "testmail9876123456789@gmail.com",
+        "phone": null
+      },
+      "linkedData": {
+        "razorpayOrders": [],
+        "paymentTransactions": []
+      }
+    },
+    {
+      "uid": "V1At0hcIgAY7v3TuN9TVkJNRu4w2",
+      "accountClassification": "ACTIVE",
+      "auth": {
+        "exists": true,
+        "email": "lkjhg123@gmail.com",
+        "phone": null,
+        "displayName": null,
+        "providers": [
+          "password"
+        ],
+        "createdAt": "2026-02-11T05:00:55.180Z",
+        "lastLoginAt": "2026-02-11T05:00:55.180Z"
+      },
+      "usersDoc": {
+        "exists": true,
+        "email": "lkjhg123@gmail.com",
+        "phone": null,
+        "role": "candidate",
+        "companyId": null,
+        "createdAt": "2026-02-11T05:00:57.073428Z",
+        "updatedAt": "2026-02-11T05:00:57.073428Z"
+      },
+      "recruitersDoc": {
+        "exists": false
+      },
+      "candidatesDoc": {
+        "exists": true,
+        "fullName": null,
+        "email": "lkjhg123@gmail.com",
+        "phone": null
+      },
+      "linkedData": {
+        "razorpayOrders": [],
+        "paymentTransactions": []
+      }
+    },
+    {
+      "uid": "VKkfqfND7tR5C3sfQya3zE4YJ8v1",
+      "accountClassification": "ACTIVE",
+      "auth": {
+        "exists": true,
+        "email": "rahmanashiq354@gmail.com",
+        "phone": "+917034468209",
+        "displayName": "Ashiq",
+        "providers": [
+          "phone",
+          "password"
+        ],
+        "createdAt": "2026-05-26T07:03:18.631Z",
+        "lastLoginAt": "2026-08-02T06:46:11.309Z"
+      },
+      "usersDoc": {
+        "exists": true,
+        "email": "rahmanashiq354@gmail.com",
+        "phone": null,
+        "role": "recruiter",
+        "companyId": null,
+        "createdAt": "2026-05-26T07:04:30.985488Z",
+        "updatedAt": "2026-05-26T07:04:30.985488Z"
+      },
+      "recruitersDoc": {
+        "exists": true,
+        "fullName": "Ashiq",
+        "officialEmail": "rahmanashiq354@gmail.com",
+        "phone": "+917034468209",
+        "companyId": "1779779070869",
+        "isSubscribed": false,
+        "subscriptionPlanId": null,
+        "createdAt": "2026-05-26T07:04:30.985488Z",
+        "updatedAt": "2026-05-26T07:04:30.985488Z"
+      },
+      "candidatesDoc": {
+        "exists": false
+      },
+      "linkedData": {
+        "razorpayOrders": [],
+        "paymentTransactions": []
+      }
+    },
+    {
+      "uid": "XNtGTysDf6SqvEARMW8xsqq3eLG2",
+      "accountClassification": "ACTIVE",
+      "auth": {
+        "exists": true,
+        "email": "raghuejjigiri333@gmail.com",
+        "phone": "+919705934003",
+        "displayName": null,
+        "providers": [
+          "phone",
+          "password"
+        ],
+        "createdAt": "2026-08-03T04:10:54.081Z",
+        "lastLoginAt": "2026-08-03T04:10:58.212Z"
+      },
+      "usersDoc": {
+        "exists": true,
+        "email": "raghuejjigiri333@gmail.com",
+        "phone": null,
+        "role": "candidate",
+        "companyId": null,
+        "createdAt": "2026-08-03T04:10:56.977145Z",
+        "updatedAt": "2026-08-03T04:10:56.977145Z"
+      },
+      "recruitersDoc": {
+        "exists": false
+      },
+      "candidatesDoc": {
+        "exists": true,
+        "fullName": null,
+        "email": "raghuejjigiri333@gmail.com",
+        "phone": "+919705934003"
+      },
+      "linkedData": {
+        "razorpayOrders": [],
+        "paymentTransactions": []
+      }
+    },
+    {
+      "uid": "Zn2ZdMsp7IM1mtGBqR0j2sd3Qqr1",
+      "accountClassification": "ACTIVE",
+      "auth": {
+        "exists": true,
+        "email": "edymc@gmail.com",
+        "phone": "+913334445555",
+        "displayName": "Eddy Marc",
+        "providers": [
+          "phone",
+          "password"
+        ],
+        "createdAt": "2026-05-13T04:40:57.591Z",
+        "lastLoginAt": "2026-05-13T04:40:57.591Z"
+      },
+      "usersDoc": {
+        "exists": true,
+        "email": "edymc@gmail.com",
+        "phone": null,
+        "role": "recruiter",
+        "companyId": null,
+        "createdAt": "2026-05-13T04:49:02.080446Z",
+        "updatedAt": "2026-05-13T04:49:02.080446Z"
+      },
+      "recruitersDoc": {
+        "exists": true,
+        "fullName": "Edy Marc",
+        "officialEmail": "edymc@gmail.com",
+        "phone": "+913334445555",
+        "companyId": "1778647741100",
+        "isSubscribed": false,
+        "subscriptionPlanId": null,
+        "createdAt": "2026-05-13T04:49:02.080446Z",
+        "updatedAt": "2026-05-13T04:49:02.080446Z"
+      },
+      "candidatesDoc": {
+        "exists": false
+      },
+      "linkedData": {
+        "razorpayOrders": [],
+        "paymentTransactions": []
+      }
+    },
+    {
+      "uid": "aUyAozbfWLNW9QlxOsFfXtp2Oke2",
+      "accountClassification": "ACTIVE",
+      "auth": {
+        "exists": true,
+        "email": "shabeer213321@gmail.com",
+        "phone": "+917025331547",
+        "displayName": null,
+        "providers": [
+          "phone",
+          "password"
+        ],
+        "createdAt": "2026-09-17T14:50:43.735Z",
+        "lastLoginAt": "2026-09-17T14:50:47.612Z"
+      },
+      "usersDoc": {
+        "exists": true,
+        "email": "shabeer213321@gmail.com",
+        "phone": null,
+        "role": "candidate",
+        "companyId": null,
+        "createdAt": "2026-09-17T14:50:45.894026Z",
+        "updatedAt": "2026-09-17T14:50:45.894026Z"
+      },
+      "recruitersDoc": {
+        "exists": false
+      },
+      "candidatesDoc": {
+        "exists": true,
+        "fullName": null,
+        "email": "shabeer213321@gmail.com",
+        "phone": "+917025331547"
+      },
+      "linkedData": {
+        "razorpayOrders": [],
+        "paymentTransactions": []
+      }
+    },
+    {
+      "uid": "ax8c1tt6TScCLZ086cHRiZYnSBo1",
+      "accountClassification": "PHONE_ALIAS_COLLISION (Re-used phone on different email)",
+      "auth": {
+        "exists": true,
+        "email": "fathimaajna33@gmai.com",
+        "phone": null,
+        "displayName": "ajna",
+        "providers": [
+          "password"
+        ],
+        "createdAt": "2026-09-16T15:20:17.920Z",
+        "lastLoginAt": "2026-09-16T15:20:17.920Z"
+      },
+      "usersDoc": {
+        "exists": true,
+        "email": "fathimaajna33@gmai.com",
+        "phone": "+917306420827",
+        "role": "recruiter",
+        "companyId": null,
+        "createdAt": "2026-09-16T15:20:19.655706Z",
+        "updatedAt": "2026-09-16T15:20:19.655706Z"
+      },
+      "recruitersDoc": {
+        "exists": true,
+        "fullName": "ajna",
+        "officialEmail": "fathimaajna33@gmai.com",
+        "phone": "+917306420827",
+        "companyId": "1789572019115",
+        "isSubscribed": false,
+        "subscriptionPlanId": null,
+        "createdAt": "2026-09-16T15:20:19.882940Z",
+        "updatedAt": "2026-09-16T15:20:19.882940Z"
+      },
+      "candidatesDoc": {
+        "exists": false
+      },
+      "linkedData": {
+        "razorpayOrders": [],
+        "paymentTransactions": []
+      }
+    },
+    {
+      "uid": "b5Zzq1U8QKhHa6lYgkMLEA6L2Uj1",
+      "accountClassification": "ACTIVE",
+      "auth": {
+        "exists": true,
+        "email": "abdullaraufpp@gmail.com",
+        "phone": "+918589019102",
+        "displayName": null,
+        "providers": [
+          "phone",
+          "password"
+        ],
+        "createdAt": "2026-03-02T06:57:24.389Z",
+        "lastLoginAt": "2026-09-17T15:36:07.618Z"
+      },
+      "usersDoc": {
+        "exists": true,
+        "email": "abdullaraufpp@gmail.com",
+        "phone": null,
+        "role": "candidate",
+        "companyId": null,
+        "createdAt": "2026-03-02T06:57:25.694465Z",
+        "updatedAt": "2026-03-02T06:57:25.694465Z"
+      },
+      "recruitersDoc": {
+        "exists": false
+      },
+      "candidatesDoc": {
+        "exists": true,
+        "fullName": null,
+        "email": "abdullaraufpp@gmail.com",
+        "phone": "+918589019102"
+      },
+      "linkedData": {
+        "razorpayOrders": [],
+        "paymentTransactions": []
+      }
+    },
+    {
+      "uid": "cBTU0OPQWWZKFCs20R0zCil1z4q1",
+      "accountClassification": "PHONE_ALIAS_COLLISION (Re-used phone on different email)",
+      "auth": {
+        "exists": true,
+        "email": "aaaajna12@gmail.com",
+        "phone": null,
+        "displayName": "ajna",
+        "providers": [
+          "password"
+        ],
+        "createdAt": "2026-09-18T09:42:42.619Z",
+        "lastLoginAt": "2026-09-18T09:42:42.619Z"
+      },
+      "usersDoc": {
+        "exists": true,
+        "email": "aaaajna12@gmail.com",
+        "phone": "+917306420827",
+        "role": "recruiter",
+        "companyId": null,
+        "createdAt": "2026-09-18T09:42:44.297791Z",
+        "updatedAt": "2026-09-18T09:42:44.297791Z"
+      },
+      "recruitersDoc": {
+        "exists": true,
+        "fullName": "ajna",
+        "officialEmail": "aaaajna12@gmail.com",
+        "phone": "+917306420827",
+        "companyId": "1789724563940",
+        "isSubscribed": false,
+        "subscriptionPlanId": null,
+        "createdAt": "2026-09-18T09:42:44.590549Z",
+        "updatedAt": "2026-09-18T09:42:44.590549Z"
+      },
+      "candidatesDoc": {
+        "exists": false
+      },
+      "linkedData": {
+        "razorpayOrders": [],
+        "paymentTransactions": []
+      }
+    },
+    {
+      "uid": "dBPOdM76oLZVxpevNdkrzMrizWg1",
+      "accountClassification": "PHONE_ALIAS_COLLISION (Re-used phone on different email)",
+      "auth": {
+        "exists": true,
+        "email": "testmail98765123456789@gmail.com",
+        "phone": null,
+        "displayName": "nsm",
+        "providers": [
+          "password"
+        ],
+        "createdAt": "2026-09-18T09:17:12.820Z",
+        "lastLoginAt": "2026-09-18T09:17:12.820Z"
+      },
+      "usersDoc": {
+        "exists": true,
+        "email": "testmail98765123456789@gmail.com",
+        "phone": "+917306420827",
+        "role": "recruiter",
+        "companyId": null,
+        "createdAt": "2026-09-18T09:17:15.413690Z",
+        "updatedAt": "2026-09-18T09:17:15.413690Z"
+      },
+      "recruitersDoc": {
+        "exists": true,
+        "fullName": "nsm",
+        "officialEmail": "testmail98765123456789@gmail.com",
+        "phone": "+917306420827",
+        "companyId": "1789723035062",
+        "isSubscribed": false,
+        "subscriptionPlanId": null,
+        "createdAt": "2026-09-18T09:17:15.650489Z",
+        "updatedAt": "2026-09-18T09:17:15.650489Z"
+      },
+      "candidatesDoc": {
+        "exists": false
+      },
+      "linkedData": {
+        "razorpayOrders": [],
+        "paymentTransactions": []
+      }
+    },
+    {
+      "uid": "dTPrthUmjqb36abhSdBmiiYhO453",
+      "accountClassification": "ACTIVE",
+      "auth": {
+        "exists": true,
+        "email": "lechunair957@gmail.com",
+        "phone": "+918281240882",
+        "displayName": "Reshma R Nair",
+        "providers": [
+          "phone",
+          "password"
+        ],
+        "createdAt": "2026-04-20T07:46:05.964Z",
+        "lastLoginAt": "2026-04-20T07:46:05.965Z"
+      },
+      "usersDoc": {
+        "exists": true,
+        "email": "lechunair957@gmail.com",
+        "phone": null,
+        "role": "recruiter",
+        "companyId": null,
+        "createdAt": "2026-04-20T07:47:28.393937Z",
+        "updatedAt": "2026-04-20T07:47:28.393937Z"
+      },
+      "recruitersDoc": {
+        "exists": true,
+        "fullName": "Reshma",
+        "officialEmail": "lechunair957@gmail.com",
+        "phone": "+918281240882",
+        "companyId": "1776671247558",
+        "isSubscribed": true,
+        "subscriptionPlanId": "monthly_1499",
+        "createdAt": "2026-04-20T07:47:28.393937Z",
+        "updatedAt": "2026-04-21T08:09:38.418295Z"
+      },
+      "candidatesDoc": {
+        "exists": false
+      },
+      "linkedData": {
+        "razorpayOrders": [],
+        "paymentTransactions": []
+      }
+    },
+    {
+      "uid": "fokDJ7Iy7ZeRXpirk0lYBWbnlPm2",
+      "accountClassification": "ACTIVE",
+      "auth": {
+        "exists": true,
+        "email": "abc@gmail.com",
+        "phone": "+917012049177",
+        "displayName": "suhaib vp",
+        "providers": [
+          "phone",
+          "password"
+        ],
+        "createdAt": "2026-08-06T14:27:02.612Z",
+        "lastLoginAt": "2026-08-06T14:27:02.612Z"
+      },
+      "usersDoc": {
+        "exists": true,
+        "email": "abc@gmail.com",
+        "phone": null,
+        "role": "recruiter",
+        "companyId": null,
+        "createdAt": "2026-08-06T15:05:19.072480Z",
+        "updatedAt": "2026-08-06T15:05:19.072480Z"
+      },
+      "recruitersDoc": {
+        "exists": true,
+        "fullName": "abd",
+        "officialEmail": "abc@gmail.com",
+        "phone": "+917012049177",
+        "companyId": "1786028718562",
+        "isSubscribed": false,
+        "subscriptionPlanId": null,
+        "createdAt": "2026-08-06T15:05:19.072480Z",
+        "updatedAt": "2026-08-06T15:05:19.072480Z"
+      },
+      "candidatesDoc": {
+        "exists": false
+      },
+      "linkedData": {
+        "razorpayOrders": [],
+        "paymentTransactions": []
+      }
+    },
+    {
+      "uid": "gUhthq4QzDdwCizpCKw2bTlx8pW2",
+      "accountClassification": "ACTIVE",
+      "auth": {
+        "exists": true,
+        "email": "viswajith@gmail.com",
+        "phone": "+918281616195",
+        "displayName": "Viswajith Test",
+        "providers": [
+          "phone",
+          "password"
+        ],
+        "createdAt": "2026-07-02T06:06:42.000Z",
+        "lastLoginAt": "2026-07-02T12:56:14.112Z"
+      },
+      "usersDoc": {
+        "exists": true,
+        "email": "viswajith@gmail.com",
+        "phone": "+918281616195",
+        "role": "candidate",
+        "companyId": null,
+        "createdAt": "2026-07-02T06:07:19.336972Z",
+        "updatedAt": "2026-07-02T06:07:19.336972Z"
+      },
+      "recruitersDoc": {
+        "exists": false
+      },
+      "candidatesDoc": {
+        "exists": true,
+        "fullName": null,
+        "email": "viswajith@gmail.com",
+        "phone": "+918281616195"
+      },
+      "linkedData": {
+        "razorpayOrders": [],
+        "paymentTransactions": []
+      }
+    },
+    {
+      "uid": "lBvgSAabM1XkvYNIgLI6MHrlUdg2",
+      "accountClassification": "ACTIVE",
+      "auth": {
+        "exists": true,
+        "email": "safebinodala@gmail.com",
+        "phone": "+919946662410",
+        "displayName": "Safa",
+        "providers": [
+          "phone",
+          "password"
+        ],
+        "createdAt": "2026-05-27T08:10:11.115Z",
+        "lastLoginAt": "2026-09-17T15:36:47.879Z"
+      },
+      "usersDoc": {
+        "exists": false
+      },
+      "recruitersDoc": {
+        "exists": true,
+        "fullName": "Saf",
+        "officialEmail": "safebinodala@gmail.com",
+        "phone": "+919946662410",
+        "companyId": "1779869478806",
+        "isSubscribed": true,
+        "subscriptionPlanId": "trial_60_days_1_rupee",
+        "createdAt": "2026-05-27T08:11:19.875452Z",
+        "updatedAt": "2026-05-31T05:58:12.747838Z"
+      },
+      "candidatesDoc": {
+        "exists": false
+      },
+      "linkedData": {
+        "razorpayOrders": [],
+        "paymentTransactions": []
+      }
+    },
+    {
+      "uid": "lJj5noIz8chiEqOMYWJBvXflr7G3",
+      "accountClassification": "ACTIVE",
+      "auth": {
+        "exists": true,
+        "email": "poiuy123@gmail.com",
+        "phone": null,
+        "displayName": null,
+        "providers": [
+          "password"
+        ],
+        "createdAt": "2026-02-11T04:13:03.845Z",
+        "lastLoginAt": "2026-02-11T05:23:35.101Z"
+      },
+      "usersDoc": {
+        "exists": true,
+        "email": "poiuy123@gmail.com",
+        "phone": null,
+        "role": "candidate",
+        "companyId": null,
+        "createdAt": "2026-02-11T04:13:07.110709Z",
+        "updatedAt": "2026-02-11T04:13:07.110709Z"
+      },
+      "recruitersDoc": {
+        "exists": false
+      },
+      "candidatesDoc": {
+        "exists": true,
+        "fullName": null,
+        "email": "poiuy123@gmail.com",
+        "phone": "1234567890"
+      },
+      "linkedData": {
+        "razorpayOrders": [],
+        "paymentTransactions": []
+      }
+    },
+    {
+      "uid": "m0dweNaudHg5Yjuzctsl8J8ZxkU2",
+      "accountClassification": "ACTIVE",
+      "auth": {
+        "exists": true,
+        "email": "talentbay2026@gmail.com",
+        "phone": null,
+        "displayName": null,
+        "providers": [
+          "password"
+        ],
+        "createdAt": "2026-08-19T16:51:01.259Z",
+        "lastLoginAt": "2026-08-19T17:23:35.332Z"
+      },
+      "usersDoc": {
+        "exists": true,
+        "email": "talentbay2026@gmail.com",
+        "phone": null,
+        "role": "candidate",
+        "companyId": null,
+        "createdAt": "2026-08-19T16:51:02.527959Z",
+        "updatedAt": "2026-08-19T16:51:02.527959Z"
+      },
+      "recruitersDoc": {
+        "exists": false
+      },
+      "candidatesDoc": {
+        "exists": true,
+        "fullName": null,
+        "email": "talentbay2026@gmail.com",
+        "phone": null
+      },
+      "linkedData": {
+        "razorpayOrders": [],
+        "paymentTransactions": []
+      }
+    },
+    {
+      "uid": "mwW1xPgCWOSGAfPX0bzUriaznm33",
+      "accountClassification": "ACTIVE",
+      "auth": {
+        "exists": true,
+        "email": "ashiifk18@gmail.com",
+        "phone": "+917025224878",
+        "displayName": null,
+        "providers": [
+          "phone",
+          "password"
+        ],
+        "createdAt": "2026-02-12T04:13:43.696Z",
+        "lastLoginAt": "2026-04-30T06:00:06.809Z"
+      },
+      "usersDoc": {
+        "exists": true,
+        "email": "Ashiifk18@gmail.com",
+        "phone": null,
+        "role": "candidate",
+        "companyId": null,
+        "createdAt": "2026-02-12T04:13:46.890873Z",
+        "updatedAt": "2026-02-12T04:13:46.890873Z"
+      },
+      "recruitersDoc": {
+        "exists": false
+      },
+      "candidatesDoc": {
+        "exists": true,
+        "fullName": null,
+        "email": "Ashiifk18@gmail.com",
+        "phone": "+917025224878"
+      },
+      "linkedData": {
+        "razorpayOrders": [],
+        "paymentTransactions": []
+      }
+    },
+    {
+      "uid": "mxwsP8MUfadbY89TAtdmpig7J9F2",
+      "accountClassification": "ACTIVE",
+      "auth": {
+        "exists": true,
+        "email": "safafebinodala@gmail.com",
+        "phone": null,
+        "displayName": "Safa Febin",
+        "providers": [
+          "password"
+        ],
+        "createdAt": "2026-09-15T13:00:25.194Z",
+        "lastLoginAt": "2026-09-15T13:00:25.194Z"
+      },
+      "usersDoc": {
+        "exists": true,
+        "email": "safafebinodala@gmail.com",
+        "phone": "9946662410",
+        "role": "recruiter",
+        "companyId": null,
+        "createdAt": "2026-09-15T13:00:31.481893Z",
+        "updatedAt": "2026-09-15T13:00:31.481893Z"
+      },
+      "recruitersDoc": {
+        "exists": true,
+        "fullName": "Safa Febin",
+        "officialEmail": "safafebinodala@gmail.com",
+        "phone": "9946662410",
+        "companyId": "1789477231163",
+        "isSubscribed": false,
+        "subscriptionPlanId": null,
+        "createdAt": "2026-09-15T13:00:31.754426Z",
+        "updatedAt": "2026-09-15T13:00:31.754426Z"
+      },
+      "candidatesDoc": {
+        "exists": false
+      },
+      "linkedData": {
+        "razorpayOrders": [],
+        "paymentTransactions": []
+      }
+    },
+    {
+      "uid": "nix82FM06DfxfNKdhXhgywTdYrc2",
+      "accountClassification": "ACTIVE",
+      "auth": {
+        "exists": true,
+        "email": "zxcv@gmail.com",
+        "phone": null,
+        "displayName": null,
+        "providers": [
+          "password"
+        ],
+        "createdAt": "2026-02-10T11:38:04.621Z",
+        "lastLoginAt": "2026-02-10T11:38:04.621Z"
+      },
+      "usersDoc": {
+        "exists": true,
+        "email": "zxcv@gmail.com",
+        "phone": null,
+        "role": "candidate",
+        "companyId": null,
+        "createdAt": "2026-02-10T11:38:06.619998Z",
+        "updatedAt": "2026-02-10T11:38:06.619998Z"
+      },
+      "recruitersDoc": {
+        "exists": false
+      },
+      "candidatesDoc": {
+        "exists": true,
+        "fullName": null,
+        "email": "zxcv@gmail.com",
+        "phone": "1234567890"
+      },
+      "linkedData": {
+        "razorpayOrders": [],
+        "paymentTransactions": []
+      }
+    },
+    {
+      "uid": "u2R2jlUhImVWYa9DMUBVpwMMCx22",
+      "accountClassification": "ACTIVE",
+      "auth": {
+        "exists": true,
+        "email": "rayansayedpd@gmail.com",
+        "phone": "+919995084250",
+        "displayName": null,
+        "providers": [
+          "phone",
+          "password"
+        ],
+        "createdAt": "2026-08-01T05:09:42.266Z",
+        "lastLoginAt": "2026-08-01T05:09:46.716Z"
+      },
+      "usersDoc": {
+        "exists": true,
+        "email": "rayansayedpd@gmail.com",
+        "phone": null,
+        "role": "candidate",
+        "companyId": null,
+        "createdAt": "2026-08-01T05:09:45.224384Z",
+        "updatedAt": "2026-08-01T05:09:45.224384Z"
+      },
+      "recruitersDoc": {
+        "exists": false
+      },
+      "candidatesDoc": {
+        "exists": true,
+        "fullName": null,
+        "email": "rayansayedpd@gmail.com",
+        "phone": "+919995084250"
+      },
+      "linkedData": {
+        "razorpayOrders": [],
+        "paymentTransactions": []
+      }
+    },
+    {
+      "uid": "va4aU3JABAdu9L6PHCzzFSO3SxF3",
+      "accountClassification": "ACTIVE",
+      "auth": {
+        "exists": true,
+        "email": "alshanichu12@gmail.com",
+        "phone": null,
+        "displayName": "alsha",
+        "providers": [
+          "password"
+        ],
+        "createdAt": "2026-09-18T06:13:03.482Z",
+        "lastLoginAt": "2026-09-18T08:40:29.354Z"
+      },
+      "usersDoc": {
+        "exists": true,
+        "email": "alshanichu12@gmail.com",
+        "phone": "+916282658542",
+        "role": "recruiter",
+        "companyId": null,
+        "createdAt": "2026-09-18T06:13:06.027117Z",
+        "updatedAt": "2026-09-18T06:13:06.027117Z"
+      },
+      "recruitersDoc": {
+        "exists": true,
+        "fullName": "alsha",
+        "officialEmail": "alshanichu12@gmail.com",
+        "phone": "+916282658542",
+        "companyId": "1789711985741",
+        "isSubscribed": false,
+        "subscriptionPlanId": null,
+        "createdAt": "2026-09-18T06:13:06.399856Z",
+        "updatedAt": "2026-09-18T06:13:06.399856Z"
+      },
+      "candidatesDoc": {
+        "exists": false
+      },
+      "linkedData": {
+        "razorpayOrders": [
+          {
+            "id": "order_TdPTu3MMPR59Sn",
+            "status": "created",
+            "amount": 100
+          },
+          {
+            "id": "order_TdPlADtNxMVsqp",
+            "status": "created",
+            "amount": 100
+          },
+          {
+            "id": "order_TdPn0TItDnMJqC",
+            "status": "created",
+            "amount": 100
+          },
+          {
+            "id": "order_TdPuq2bgg8sWcO",
+            "status": "created",
+            "amount": 100
+          },
+          {
+            "id": "order_TdQDAQpd69i8GT",
+            "status": "created",
+            "amount": 100
+          },
+          {
+            "id": "order_TdQDknlfMqbcSm",
+            "status": "created",
+            "amount": 100
+          },
+          {
+            "id": "order_TdQSiNNKb33FwQ",
+            "status": "created",
+            "amount": 100
+          },
+          {
+            "id": "order_TdQUo8n7VAdLOO",
+            "status": "created",
+            "amount": 100
+          },
+          {
+            "id": "order_TdQd8s57mxX62b",
+            "status": "created",
+            "amount": 100
+          },
+          {
+            "id": "order_TdRD5bib2nNTbU",
+            "status": "created",
+            "amount": 100
+          },
+          {
+            "id": "order_TdRDPrRIdh0opG",
+            "status": "created",
+            "amount": 100
+          }
+        ],
+        "paymentTransactions": []
+      }
+    },
+    {
+      "uid": "yHVwUj5xZtNf2PMWz89RIE8Xiks1",
+      "accountClassification": "ACTIVE",
+      "auth": {
+        "exists": true,
+        "email": "iamarshalv@gmail.com",
+        "phone": null,
+        "displayName": null,
+        "providers": [
+          "password"
+        ],
+        "createdAt": "2026-09-01T17:34:08.035Z",
+        "lastLoginAt": "2026-09-01T17:34:08.035Z"
+      },
+      "usersDoc": {
+        "exists": true,
+        "email": "iamarshalv@gmail.com",
+        "phone": null,
+        "role": "candidate",
+        "companyId": null,
+        "createdAt": "2026-09-01T17:34:09.711830Z",
+        "updatedAt": "2026-09-01T17:34:09.711830Z"
+      },
+      "recruitersDoc": {
+        "exists": false
+      },
+      "candidatesDoc": {
+        "exists": true,
+        "fullName": null,
+        "email": "iamarshalv@gmail.com",
+        "phone": null
+      },
+      "linkedData": {
+        "razorpayOrders": [],
+        "paymentTransactions": []
+      }
+    },
+    {
+      "uid": "zlmbZ3oKBSSrQNR39IcPqrbYzX92",
+      "accountClassification": "ACTIVE",
+      "auth": {
+        "exists": true,
+        "email": "admin@test.com",
+        "phone": "+919087654321",
+        "displayName": null,
+        "providers": [
+          "phone",
+          "password"
+        ],
+        "createdAt": "2026-06-01T05:31:25.352Z",
+        "lastLoginAt": "2026-06-01T05:31:29.880Z"
+      },
+      "usersDoc": {
+        "exists": true,
+        "email": "admin@test.com",
+        "phone": null,
+        "role": "candidate",
+        "companyId": null,
+        "createdAt": "2026-06-01T05:31:29.164422Z",
+        "updatedAt": "2026-06-01T05:31:29.164422Z"
+      },
+      "recruitersDoc": {
+        "exists": false
+      },
+      "candidatesDoc": {
+        "exists": true,
+        "fullName": null,
+        "email": "admin@test.com",
+        "phone": "+919087654321"
+      },
+      "linkedData": {
+        "razorpayOrders": [],
+        "paymentTransactions": []
+      }
+    },
+    {
+      "uid": "zCsAsHSJIVZCaNlVYGABAlJKjGx1",
+      "accountClassification": "ORPHANED_FIRESTORE_DATA (Auth deleted)",
+      "auth": {
+        "exists": false
+      },
+      "usersDoc": {
+        "exists": false
+      },
+      "recruitersDoc": {
+        "exists": true,
+        "fullName": "ajna azeez",
+        "officialEmail": "fathimaajna33@gmail.com",
+        "phone": "+917306420827",
+        "companyId": "1785606082597",
+        "isSubscribed": true,
+        "subscriptionPlanId": "trial_60_days_1_rupee",
+        "createdAt": "2026-08-01T17:41:23.157933Z",
+        "updatedAt": "2026-08-13T11:26:05.991569Z"
+      },
+      "candidatesDoc": {
+        "exists": false
+      },
+      "linkedData": {
+        "razorpayOrders": [],
+        "paymentTransactions": []
+      }
+    }
+  ],
+  "companies": [
+    {
+      "companyId": "1789565949759",
+      "exists": true,
+      "name": "ajna",
+      "createdBy": "FCdkWOHMu2ZJYdE48CGLZ0AKdTG2",
+      "isExclusiveToTargetUids": true,
+      "jobsCount": 0,
+      "createdAt": "2026-09-16T13:39:10.379210Z"
+    },
+    {
+      "companyId": "1785606082597",
+      "exists": true,
+      "name": "talent",
+      "createdBy": "zCsAsHSJIVZCaNlVYGABAlJKjGx1",
+      "isExclusiveToTargetUids": true,
+      "jobsCount": 0,
+      "createdAt": "2026-08-01T17:41:23.157933Z"
+    },
+    {
+      "companyId": "1789570400461",
+      "exists": true,
+      "name": "alsha",
+      "createdBy": "EvLLOMQtCZXLTelfNJZ3Zazt6My2",
+      "isExclusiveToTargetUids": true,
+      "jobsCount": 0,
+      "createdAt": "2026-09-16T14:53:21.114932Z"
+    },
+    {
+      "companyId": "1789571430006",
+      "exists": true,
+      "name": "ajna",
+      "createdBy": "HK7ijc8vFkOZoGik3zNW4XIXZ173",
+      "isExclusiveToTargetUids": true,
+      "jobsCount": 0,
+      "createdAt": "2026-09-16T15:10:30.882606Z"
+    },
+    {
+      "companyId": "1789572019115",
+      "exists": true,
+      "name": "ajna",
+      "createdBy": "ax8c1tt6TScCLZ086cHRiZYnSBo1",
+      "isExclusiveToTargetUids": true,
+      "jobsCount": 0,
+      "createdAt": "2026-09-16T15:20:19.786282Z"
+    },
+    {
+      "companyId": "1789724563940",
+      "exists": true,
+      "name": "ajna",
+      "createdBy": "cBTU0OPQWWZKFCs20R0zCil1z4q1",
+      "isExclusiveToTargetUids": true,
+      "jobsCount": 0,
+      "createdAt": "2026-09-18T09:42:44.451632Z"
+    },
+    {
+      "companyId": "1789723035062",
+      "exists": true,
+      "name": "dfghj",
+      "createdBy": "dBPOdM76oLZVxpevNdkrzMrizWg1",
+      "isExclusiveToTargetUids": true,
+      "jobsCount": 0,
+      "createdAt": "2026-09-18T09:17:15.538743Z"
+    },
+    {
+      "companyId": "1779509665403",
+      "exists": true,
+      "name": "Talent Plus",
+      "createdBy": "8IwprXcRZDNEz2X1UT8sCRz1rIF3",
+      "isExclusiveToTargetUids": true,
+      "jobsCount": 1,
+      "createdAt": "2026-05-23T04:14:25.913078Z"
+    },
+    {
+      "companyId": "1777528926607",
+      "exists": true,
+      "name": "Confio",
+      "createdBy": "75ESiNLVQcObqYSsx3znsL9R2DD2",
+      "isExclusiveToTargetUids": true,
+      "jobsCount": 0,
+      "createdAt": "2026-04-30T06:02:07.538841Z"
+    },
+    {
+      "companyId": "1776518683785",
+      "exists": true,
+      "name": "acme corporation",
+      "createdBy": "HbhRvJcsXfMvynyUjs7DajXhJfu2",
+      "isExclusiveToTargetUids": true,
+      "jobsCount": 6,
+      "createdAt": "2026-04-18T13:24:44.251210Z"
+    },
+    {
+      "companyId": "1779779070869",
+      "exists": true,
+      "name": "Truslink",
+      "createdBy": "VKkfqfND7tR5C3sfQya3zE4YJ8v1",
+      "isExclusiveToTargetUids": true,
+      "jobsCount": 0,
+      "createdAt": "2026-05-26T07:04:30.985488Z"
+    },
+    {
+      "companyId": "1789577089736",
+      "exists": true,
+      "name": "Pearl data direct",
+      "createdBy": "3FTGJO7IvVR1QrcZVcGNMRx96CW2",
+      "isExclusiveToTargetUids": true,
+      "jobsCount": 0,
+      "createdAt": "2026-09-16T16:44:50.572922Z"
+    },
+    {
+      "companyId": "1772433605150",
+      "exists": true,
+      "name": "Waqttix LLP",
+      "createdBy": "8BwWUAwojwb8QPmC7EoG271eDNX2",
+      "isExclusiveToTargetUids": true,
+      "jobsCount": 12,
+      "createdAt": "2026-03-02T06:40:05.509579Z"
+    },
+    {
+      "companyId": "1776671247558",
+      "exists": true,
+      "name": "Gravity",
+      "createdBy": "dTPrthUmjqb36abhSdBmiiYhO453",
+      "isExclusiveToTargetUids": true,
+      "jobsCount": 8,
+      "createdAt": "2026-04-20T07:47:28.393937Z"
+    },
+    {
+      "companyId": "1774677539743",
+      "exists": true,
+      "name": "Edu world For Abroad",
+      "createdBy": "H8ViR7IR3nbXWEeindO1bNvEPtj1",
+      "isExclusiveToTargetUids": true,
+      "jobsCount": 5,
+      "createdAt": "2026-03-28T05:59:04.196351Z"
+    },
+    {
+      "companyId": "1786028718562",
+      "exists": true,
+      "name": "confio",
+      "createdBy": "fokDJ7Iy7ZeRXpirk0lYBWbnlPm2",
+      "isExclusiveToTargetUids": true,
+      "jobsCount": 0,
+      "createdAt": "2026-08-06T15:05:19.072480Z"
+    },
+    {
+      "companyId": "1778647741100",
+      "exists": true,
+      "name": "info Park Corp",
+      "createdBy": "Zn2ZdMsp7IM1mtGBqR0j2sd3Qqr1",
+      "isExclusiveToTargetUids": true,
+      "jobsCount": 0,
+      "createdAt": "2026-05-13T04:49:02.080446Z"
+    },
+    {
+      "companyId": "1777354891397",
+      "exists": true,
+      "name": "Sukitha Solution",
+      "createdBy": "Q2HPHboh5hTCQldjogjc0WuCmuu2",
+      "isExclusiveToTargetUids": true,
+      "jobsCount": 1,
+      "createdAt": "2026-04-28T05:41:32.570229Z"
+    },
+    {
+      "companyId": "1779869478806",
+      "exists": true,
+      "name": "Digi",
+      "createdBy": "lBvgSAabM1XkvYNIgLI6MHrlUdg2",
+      "isExclusiveToTargetUids": true,
+      "jobsCount": 1,
+      "createdAt": "2026-05-27T08:11:19.875452Z"
+    },
+    {
+      "companyId": "1789711985741",
+      "exists": true,
+      "name": "alsha tech",
+      "createdBy": "va4aU3JABAdu9L6PHCzzFSO3SxF3",
+      "isExclusiveToTargetUids": true,
+      "jobsCount": 0,
+      "createdAt": "2026-09-18T06:13:06.275066Z"
+    },
+    {
+      "companyId": "1789477231163",
+      "exists": true,
+      "name": "CASA Technology Ltd",
+      "createdBy": "mxwsP8MUfadbY89TAtdmpig7J9F2",
+      "isExclusiveToTargetUids": true,
+      "jobsCount": 0,
+      "createdAt": "2026-09-15T13:00:31.626873Z"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+User-agent: *
+Allow: /
+Allow: /login
+Allow: /register
+Allow: /forgot-password
+Allow: /about
+Allow: /support
+
+# Protect private authenticated application workspaces
+Disallow: /dashboard
+Disallow: /jobs
+Disallow: /candidates
+Disallow: /applications
+Disallow: /chat
+Disallow: /messages
+Disallow: /notifications
+Disallow: /profile
+Disallow: /company
+Disallow: /settings
+Disallow: /subscription
+
+Sitemap: https://talentbay-recruiter.web.app/sitemap.xml

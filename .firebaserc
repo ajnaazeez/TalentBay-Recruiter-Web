@@ -1,0 +1,15 @@
+{
+  "projects": {
+    "default": "talent-bay-d0b92"
+  },
+  "targets": {
+    "talent-bay-d0b92": {
+      "hosting": {
+        "recruiter": [
+          "talentbay-recruiter"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}
