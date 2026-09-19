@@ -5,10 +5,11 @@ import {
   Download,
   Upload,
   CheckCircle2,
-  AlertTriangle,
+  AlertCircle,
   XCircle,
   ArrowLeft,
   Building2,
+  Sparkles,
   ShieldAlert,
   RotateCcw,
   Loader2,
@@ -16,7 +17,7 @@ import {
   ChevronDown,
   ChevronUp,
   Check,
-  Sparkles,
+  Info,
 } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
 import { jobService } from '@/services/jobService';
@@ -117,7 +118,7 @@ export const BulkJobUploadPage: React.FC = () => {
       const checkedRows = bulkJobService.checkDuplicates(validated, activeTitles);
 
       setValidatedRows(checkedRows);
-      setFilterTab('all');
+      setFilterTab(checkedRows.some((r) => !r.isValid) ? 'all' : 'valid');
     } catch (err: unknown) {
       console.error('[BulkJobUploadPage] Parse error:', err);
       setParseError(err instanceof Error ? err.message : 'Failed to parse spreadsheet file.');
@@ -270,458 +271,448 @@ export const BulkJobUploadPage: React.FC = () => {
         </div>
       )}
 
-      {/* 3. Upload & Template Download Stage (When no file or before parsing) */}
-      {validatedRows.length === 0 && (
-        <div className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200/90 shadow-xs space-y-8">
-          <div className="text-center max-w-xl mx-auto space-y-2">
-            <div className="w-12 h-12 rounded-2xl bg-teal-50 text-teal-700 mx-auto flex items-center justify-center">
-              <FileSpreadsheet className="w-6 h-6" />
-            </div>
-            <h2 className="text-xl sm:text-2xl font-bold text-slate-900">
-              Bulk Job Upload
-            </h2>
-            <p className="text-xs sm:text-sm text-slate-500">
-              Create multiple jobs simultaneously in the TalentBay candidate ecosystem using Excel spreadsheets.
-            </p>
-          </div>
-
-          {/* Drag & drop upload zone */}
-          <div
-            onDragOver={(e) => e.preventDefault()}
-            onDrop={handleDrop}
-            onClick={() => fileInputRef.current?.click()}
-            className="border-2 border-dashed border-slate-300 hover:border-teal-500 bg-slate-50/50 hover:bg-teal-50/20 rounded-2xl p-8 sm:p-12 text-center cursor-pointer transition flex flex-col items-center justify-center gap-3 group max-w-2xl mx-auto"
-          >
-            <input
-              ref={fileInputRef}
-              type="file"
-              accept=".xlsx, .xls"
-              onChange={handleFileChange}
-              className="hidden"
-            />
-
-            <div className="w-14 h-14 rounded-2xl bg-teal-50 border border-teal-200/60 flex items-center justify-center text-teal-600 group-hover:scale-105 transition-transform shadow-xs">
-              {parsing ? (
-                <Loader2 className="w-7 h-7 animate-spin" />
-              ) : (
-                <Upload className="w-7 h-7" />
-              )}
-            </div>
-
+      {/* 3. Main Upload / Template Card (Step 1 & Step 2 Grid) */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Left Column: Instructions & Template Download */}
+        <div className="lg:col-span-1 space-y-4">
+          <div className="bg-white rounded-3xl p-6 border border-slate-200/90 shadow-xs space-y-4">
             <div className="space-y-1">
-              <p className="text-xs sm:text-sm font-bold text-slate-800">
-                {selectedFile ? selectedFile.name : 'Drag and drop your Excel template here'}
-              </p>
-              <p className="text-[11px] text-slate-400">
-                or click to browse local files (Supports .xlsx formats)
-              </p>
-            </div>
-
-            <button
-              type="button"
-              className="mt-2 inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold text-teal-700 bg-white border border-slate-200 rounded-xl group-hover:border-teal-300 shadow-xs"
-            >
-              <Upload className="w-3.5 h-3.5" />
-              <span>{selectedFile ? 'Change File' : 'Browse Files'}</span>
-            </button>
-          </div>
-
-          {/* Template Download Section */}
-          <div className="max-w-2xl mx-auto p-4 sm:p-5 bg-slate-50 rounded-2xl border border-slate-200/70 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <div className="space-y-0.5">
-              <p className="text-xs font-bold text-slate-800">Need the format template?</p>
-              <p className="text-[11px] text-slate-500">
-                Download the pre-configured 17-column Excel template to start adding jobs.
+              <span className="text-[10px] font-bold uppercase tracking-wider text-teal-700 bg-teal-50 px-2 py-0.5 rounded border border-teal-200/60">
+                Step 1
+              </span>
+              <h3 className="text-base font-bold text-slate-900">
+                Download Official Template
+              </h3>
+              <p className="text-xs text-slate-500 leading-relaxed">
+                Use our standardized Excel template with verified columns and pre-filled sample roles.
               </p>
             </div>
 
             <button
               type="button"
               onClick={handleDownloadTemplate}
-              className="inline-flex items-center justify-center gap-2 px-4 py-2 text-xs font-bold text-teal-700 bg-white hover:bg-teal-50 border border-teal-200/80 rounded-xl transition shadow-2xs shrink-0"
+              className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-bold text-teal-700 bg-teal-50 hover:bg-teal-100 border border-teal-200 rounded-xl transition cursor-pointer"
             >
-              <Download className="w-3.5 h-3.5" />
-              <span>Download Template</span>
+              <Download className="w-4 h-4" />
+              <span>Download Template (.xlsx)</span>
             </button>
+
+            <div className="space-y-2.5 pt-4 border-t border-slate-100 text-[11px] text-slate-600">
+              <h4 className="font-bold text-slate-800 uppercase tracking-wider text-[10px] flex items-center gap-1">
+                <Info className="w-3 h-3 text-teal-600" /> Key Guidelines
+              </h4>
+              <ul className="space-y-1.5 pl-3 list-disc">
+                <li><strong>Job Title</strong> & <strong>Required Skills</strong> are mandatory.</li>
+                <li><strong>Employment Type</strong>: Full-Time, Part-Time, Contract.</li>
+                <li><strong>Work Mode</strong>: Onsite, Hybrid, Remote.</li>
+                <li><strong>Location</strong>: Country, State, City, Offices, Openings.</li>
+                <li><strong>Experience</strong>: Fresher or Experienced (Min & Max).</li>
+              </ul>
+            </div>
           </div>
-
-          {parseError && (
-            <div className="max-w-2xl mx-auto p-4 bg-red-50 border border-red-200 rounded-2xl text-xs text-red-800 flex items-start gap-2.5">
-              <AlertTriangle className="w-4 h-4 text-red-600 shrink-0 mt-0.5" />
-              <span className="leading-relaxed">{parseError}</span>
-            </div>
-          )}
         </div>
-      )}
 
-      {/* 4. Review Uploaded Jobs Screen (Section 9, 10, 11) */}
-      {validatedRows.length > 0 && (
-        <div className="space-y-6">
-          {/* Header & Stat Cards */}
+        {/* Right Column: Dropzone & Upload Action */}
+        <div className="lg:col-span-2 space-y-4">
           <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-xs space-y-6">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-              <div className="space-y-1">
-                <div className="flex items-center gap-2">
-                  <button
-                    type="button"
-                    onClick={handleReset}
-                    className="text-xs font-bold text-slate-500 hover:text-slate-800 inline-flex items-center gap-1"
-                  >
-                    <ArrowLeft className="w-3.5 h-3.5" /> Back
-                  </button>
-                </div>
-                <h2 className="text-lg sm:text-xl font-bold text-slate-900">
-                  Review Uploaded Jobs
-                </h2>
-                <p className="text-xs text-slate-500">
-                  Verify parsed fields and address validation errors before posting
-                </p>
-              </div>
-
-              {/* 3 Summary Stat Cards (Matching Manual Figure Page 6) */}
-              <div className="grid grid-cols-3 gap-2 sm:gap-4 shrink-0">
-                {/* Total Parsed */}
-                <div
-                  onClick={() => setFilterTab('all')}
-                  className={`p-3 sm:px-5 sm:py-3 rounded-2xl border text-center cursor-pointer transition ${
-                    filterTab === 'all'
-                      ? 'bg-slate-900 text-white border-slate-900'
-                      : 'bg-slate-50 text-slate-700 border-slate-200 hover:border-slate-300'
-                  }`}
-                >
-                  <p className="text-[10px] font-bold uppercase tracking-wider opacity-80">
-                    Total Parsed
-                  </p>
-                  <p className="text-lg sm:text-xl font-black mt-0.5">
-                    {validatedRows.length}
-                  </p>
-                </div>
-
-                {/* Valid (Ready to Post) */}
-                <div
-                  onClick={() => setFilterTab('valid')}
-                  className={`p-3 sm:px-5 sm:py-3 rounded-2xl border text-center cursor-pointer transition ${
-                    filterTab === 'valid'
-                      ? 'bg-emerald-700 text-white border-emerald-700'
-                      : 'bg-emerald-50 text-emerald-800 border-emerald-200 hover:border-emerald-300'
-                  }`}
-                >
-                  <p className="text-[10px] font-bold uppercase tracking-wider opacity-80">
-                    Valid (Ready to Post)
-                  </p>
-                  <p className="text-lg sm:text-xl font-black mt-0.5">
-                    {validRows.length}
-                  </p>
-                </div>
-
-                {/* Invalid (Needs Fix) */}
-                <div
-                  onClick={() => setFilterTab('errors')}
-                  className={`p-3 sm:px-5 sm:py-3 rounded-2xl border text-center cursor-pointer transition ${
-                    filterTab === 'errors'
-                      ? 'bg-red-700 text-white border-red-700'
-                      : errorRows.length > 0
-                      ? 'bg-red-50 text-red-800 border-red-200 hover:border-red-300'
-                      : 'bg-slate-50 text-slate-500 border-slate-200'
-                  }`}
-                >
-                  <p className="text-[10px] font-bold uppercase tracking-wider opacity-80">
-                    Invalid (Needs Fix)
-                  </p>
-                  <p className="text-lg sm:text-xl font-black mt-0.5">
-                    {errorRows.length}
-                  </p>
-                </div>
-              </div>
+            <div className="space-y-1">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-teal-700 bg-teal-50 px-2 py-0.5 rounded border border-teal-200/60">
+                Step 2
+              </span>
+              <h3 className="text-base font-bold text-slate-900">
+                Upload Completed Spreadsheet
+              </h3>
+              <p className="text-xs text-slate-500">
+                Upload your Excel (.xlsx, .xls) file to preview and validate job postings before publishing.
+              </p>
             </div>
 
-            {/* Potential Duplicates Detected Warning Banner (Section 11, Figure 4) */}
-            {hasDuplicates && (
-              <div className="p-4 sm:p-5 bg-amber-50 border border-amber-300 rounded-2xl space-y-1.5 text-amber-950">
-                <div className="flex items-center gap-2">
-                  <AlertTriangle className="w-5 h-5 text-amber-600 shrink-0" />
-                  <h4 className="font-bold text-xs sm:text-sm text-amber-900">
-                    Potential Duplicates Detected
-                  </h4>
-                </div>
-                <p className="text-xs text-amber-800 pl-7 leading-relaxed">
-                  Some of the uploaded job titles match titles that you already have active. Posting them will create duplicate listings. Please confirm duplicate warning check below to enable posting.
+            {/* Drag and drop zone */}
+            <div
+              onDragOver={(e) => e.preventDefault()}
+              onDrop={handleDrop}
+              onClick={() => fileInputRef.current?.click()}
+              className="border-2 border-dashed border-slate-300 hover:border-teal-500 bg-slate-50/50 hover:bg-teal-50/20 rounded-2xl p-8 sm:p-10 text-center cursor-pointer transition flex flex-col items-center justify-center gap-3 group"
+            >
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept=".xlsx, .xls, .csv"
+                onChange={handleFileChange}
+                className="hidden"
+              />
+
+              <div className="w-14 h-14 rounded-2xl bg-teal-50 border border-teal-200/60 flex items-center justify-center text-teal-600 group-hover:scale-105 transition-transform shadow-xs">
+                {parsing ? (
+                  <Loader2 className="w-7 h-7 animate-spin" />
+                ) : (
+                  <FileSpreadsheet className="w-7 h-7" />
+                )}
+              </div>
+
+              <div className="space-y-1">
+                <p className="text-xs sm:text-sm font-bold text-slate-800">
+                  {selectedFile ? selectedFile.name : 'Click to select or drag and drop spreadsheet'}
+                </p>
+                <p className="text-[11px] text-slate-400">
+                  Supports Microsoft Excel (.xlsx, .xls) and CSV files up to 10MB
                 </p>
               </div>
-            )}
+
+              <button
+                type="button"
+                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-bold text-teal-700 bg-white border border-slate-200 rounded-xl group-hover:border-teal-300 shadow-xs cursor-pointer"
+              >
+                <Upload className="w-3.5 h-3.5" />
+                <span>{selectedFile ? 'Change File' : 'Browse Files'}</span>
+              </button>
+            </div>
 
             {parseError && (
               <div className="p-4 bg-red-50 border border-red-200 rounded-2xl text-xs text-red-800 flex items-start gap-2.5">
-                <AlertTriangle className="w-4 h-4 text-red-600 shrink-0 mt-0.5" />
+                <AlertCircle className="w-4 h-4 text-red-600 shrink-0 mt-0.5" />
                 <span className="leading-relaxed">{parseError}</span>
               </div>
             )}
+          </div>
+        </div>
+      </div>
 
-            {/* Publishing Progress Bar */}
-            {publishing && publishProgress && (
-              <div className="p-4 bg-teal-50 border border-teal-200 rounded-2xl space-y-2">
-                <div className="flex items-center justify-between text-xs font-bold text-teal-900">
-                  <span>
-                    Publishing job {publishProgress.current} of {publishProgress.total}...
-                  </span>
-                  <span>
-                    {Math.round((publishProgress.current / publishProgress.total) * 100)}%
-                  </span>
-                </div>
-                <div className="w-full h-2 bg-teal-200/60 rounded-full overflow-hidden">
-                  <div
-                    className="h-full bg-teal-600 transition-all duration-300"
-                    style={{
-                      width: `${(publishProgress.current / publishProgress.total) * 100}%`,
-                    }}
-                  />
-                </div>
-                <p className="text-[11px] text-teal-700 truncate">
-                  Role: {publishProgress.currentRole}
-                </p>
+      {/* 4. Validation Summary & Job Rows Preview (Step 3) */}
+      {validatedRows.length > 0 && (
+        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-xs space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-5">
+            <div>
+              <span className="text-[10px] font-bold uppercase tracking-wider text-teal-700 bg-teal-50 px-2 py-0.5 rounded border border-teal-200/60">
+                Step 3
+              </span>
+              <h3 className="text-base font-bold text-slate-900 mt-1">
+                Validation & Preview
+              </h3>
+              <p className="text-xs text-slate-500">
+                Review parsed job rows before publishing to candidate talent network
+              </p>
+            </div>
+
+            {/* Filter Tabs & Counters */}
+            <div className="flex items-center gap-2 flex-wrap">
+              <div className="flex items-center p-1 bg-slate-100 rounded-xl text-xs font-bold">
+                <button
+                  type="button"
+                  onClick={() => setFilterTab('all')}
+                  className={`px-3 py-1.5 rounded-lg transition cursor-pointer ${
+                    filterTab === 'all'
+                      ? 'bg-white text-slate-900 shadow-xs'
+                      : 'text-slate-500 hover:text-slate-800'
+                  }`}
+                >
+                  All ({validatedRows.length})
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setFilterTab('valid')}
+                  className={`px-3 py-1.5 rounded-lg transition flex items-center gap-1 cursor-pointer ${
+                    filterTab === 'valid'
+                      ? 'bg-white text-emerald-700 shadow-xs'
+                      : 'text-slate-500 hover:text-slate-800'
+                  }`}
+                >
+                  <CheckCircle2 className="w-3 h-3 text-emerald-600" />
+                  Valid ({validRows.length})
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setFilterTab('errors')}
+                  className={`px-3 py-1.5 rounded-lg transition flex items-center gap-1 cursor-pointer ${
+                    filterTab === 'errors'
+                      ? 'bg-white text-red-700 shadow-xs'
+                      : 'text-slate-500 hover:text-slate-800'
+                  }`}
+                >
+                  <XCircle className="w-3 h-3 text-red-600" />
+                  Errors ({errorRows.length})
+                </button>
+                {hasDuplicates && (
+                  <button
+                    type="button"
+                    onClick={() => setFilterTab('duplicates')}
+                    className={`px-3 py-1.5 rounded-lg transition flex items-center gap-1 cursor-pointer ${
+                      filterTab === 'duplicates'
+                        ? 'bg-white text-amber-700 shadow-xs'
+                        : 'text-slate-500 hover:text-slate-800'
+                    }`}
+                  >
+                    <AlertCircle className="w-3 h-3 text-amber-600" />
+                    Duplicates ({duplicateRows.length})
+                  </button>
+                )}
               </div>
-            )}
+            </div>
+          </div>
 
-            {/* Review Table (Matching Section 10, Figure 4 & 5) */}
-            <div className="border border-slate-200 rounded-2xl overflow-hidden">
-              <div className="overflow-x-auto">
-                <table className="w-full text-left border-collapse text-xs">
-                  <thead>
-                    <tr className="bg-slate-50 border-b border-slate-200 text-[11px] font-bold text-slate-500 uppercase tracking-wider">
-                      <th className="py-3 px-4 w-14">Row</th>
-                      <th className="py-3 px-4">Job Title / Role</th>
-                      <th className="py-3 px-4">Location</th>
-                      <th className="py-3 px-4">Mode / Type</th>
-                      <th className="py-3 px-4">Experience</th>
-                      <th className="py-3 px-4">Status</th>
-                      <th className="py-3 px-4 text-right">Details</th>
+          {/* Potential Duplicates Detected Banner */}
+          {hasDuplicates && (
+            <div className="p-4 bg-amber-50 border border-amber-200/90 rounded-2xl space-y-1 text-xs text-amber-900">
+              <div className="flex items-center gap-2 font-bold text-amber-900">
+                <AlertCircle className="w-4 h-4 text-amber-600 shrink-0" />
+                <span>Potential Duplicates Detected</span>
+              </div>
+              <p className="text-amber-800 pl-6 text-[11px] leading-relaxed">
+                Some of the uploaded job titles match active jobs in your company account. Posting them will create duplicate listings. Please confirm duplicate warning check below to proceed.
+              </p>
+            </div>
+          )}
+
+          {/* Publishing Progress Bar */}
+          {publishing && publishProgress && (
+            <div className="p-4 bg-teal-50 border border-teal-200 rounded-2xl space-y-2">
+              <div className="flex items-center justify-between text-xs font-bold text-teal-900">
+                <span>
+                  Publishing job {publishProgress.current} of {publishProgress.total}...
+                </span>
+                <span>
+                  {Math.round((publishProgress.current / publishProgress.total) * 100)}%
+                </span>
+              </div>
+              <div className="w-full h-2 bg-teal-200/60 rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-teal-600 transition-all duration-300"
+                  style={{
+                    width: `${(publishProgress.current / publishProgress.total) * 100}%`,
+                  }}
+                />
+              </div>
+              <p className="text-[11px] text-teal-700 truncate">
+                Role: {publishProgress.currentRole}
+              </p>
+            </div>
+          )}
+
+          {/* Parsed Rows Table */}
+          <div className="border border-slate-200 rounded-2xl overflow-hidden">
+            <div className="overflow-x-auto">
+              <table className="w-full text-left border-collapse text-xs">
+                <thead>
+                  <tr className="bg-slate-50 border-b border-slate-200 text-[11px] font-bold text-slate-500 uppercase tracking-wider">
+                    <th className="py-3 px-4">Row</th>
+                    <th className="py-3 px-4">Status</th>
+                    <th className="py-3 px-4">Job Title / Role</th>
+                    <th className="py-3 px-4">Type</th>
+                    <th className="py-3 px-4">Mode</th>
+                    <th className="py-3 px-4">Location</th>
+                    <th className="py-3 px-4">Experience</th>
+                    <th className="py-3 px-4">Salary</th>
+                    <th className="py-3 px-4">Details & Errors</th>
+                    <th className="py-3 px-4 text-right">View</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-100">
+                  {displayedRows.length === 0 ? (
+                    <tr>
+                      <td colSpan={10} className="text-center py-8 text-slate-400 text-xs">
+                        No rows match the selected filter.
+                      </td>
                     </tr>
-                  </thead>
-                  <tbody className="divide-y divide-slate-100">
-                    {displayedRows.length === 0 ? (
-                      <tr>
-                        <td colSpan={7} className="text-center py-8 text-slate-400 text-xs">
-                          No rows match the selected filter.
-                        </td>
-                      </tr>
-                    ) : (
-                      displayedRows.map((r) => {
-                        const isExpanded = Boolean(expandedRows[r.rowNumber]);
-                        const isDuplicate = Boolean(r.isDuplicate && r.isValid);
+                  ) : (
+                    displayedRows.map((r) => {
+                      const isExpanded = Boolean(expandedRows[r.rowNumber]);
+                      const isDuplicate = Boolean(r.isDuplicate && r.isValid);
 
-                        return (
-                          <React.Fragment key={r.rowNumber}>
-                            <tr
-                              className={`hover:bg-slate-50/80 transition ${
-                                !r.isValid
-                                  ? 'bg-red-50/30'
-                                  : isDuplicate
-                                  ? 'bg-amber-50/30'
-                                  : ''
-                              }`}
-                            >
-                              <td className="py-3.5 px-4 font-bold text-slate-600">
-                                {r.rowNumber}
-                              </td>
-
-                              <td className="py-3.5 px-4 font-bold text-slate-900 max-w-[200px]">
-                                <div className="truncate">
-                                  {r.raw.title || (
-                                    <span className="text-red-500 font-normal italic">
-                                      Missing Title
-                                    </span>
-                                  )}
-                                </div>
-                              </td>
-
-                              <td className="py-3.5 px-4 text-slate-600">
-                                {r.raw.city
-                                  ? `${r.raw.city}, ${r.raw.country || 'India'}`
-                                  : <span className="text-red-500 italic">Missing City</span>}
-                              </td>
-
-                              <td className="py-3.5 px-4 text-slate-600">
-                                <div>
-                                  <span className="font-medium text-slate-800">
-                                    {r.raw.workMode || 'Onsite'}
-                                  </span>
-                                  <span className="text-[10px] text-slate-400 block">
-                                    {r.raw.employmentType || 'Full-Time'}
-                                  </span>
-                                </div>
-                              </td>
-
-                              <td className="py-3.5 px-4 text-slate-600">
-                                {r.raw.experienceLevel === 'Fresher'
-                                  ? 'Fresher'
-                                  : r.raw.minExperience !== undefined
-                                  ? `${r.raw.minExperience} - ${r.raw.maxExperience ?? r.raw.minExperience} Yrs`
-                                  : 'Experienced'}
-                              </td>
-
-                              {/* Status Badge */}
-                              <td className="py-3.5 px-4">
-                                {!r.isValid ? (
-                                  <span className="inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full bg-red-50 text-red-700 border border-red-200 whitespace-nowrap">
-                                    <XCircle className="w-3 h-3 text-red-600" />
-                                    Invalid
-                                  </span>
-                                ) : isDuplicate ? (
-                                  <span className="inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-50 text-amber-800 border border-amber-300 whitespace-nowrap">
-                                    <AlertTriangle className="w-3 h-3 text-amber-600" />
-                                    Potential Duplicate
-                                  </span>
+                      return (
+                        <React.Fragment key={r.rowNumber}>
+                          <tr
+                            className={`hover:bg-slate-50/80 transition ${
+                              !r.isValid
+                                ? 'bg-red-50/30'
+                                : isDuplicate
+                                ? 'bg-amber-50/30'
+                                : ''
+                            }`}
+                          >
+                            <td className="py-3 px-4 font-bold text-slate-700">
+                              #{r.rowNumber}
+                            </td>
+                            <td className="py-3 px-4">
+                              {!r.isValid ? (
+                                <span className="inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full bg-red-50 text-red-700 border border-red-200 whitespace-nowrap">
+                                  <XCircle className="w-3 h-3 text-red-600" />
+                                  {r.errors.length} Error{r.errors.length > 1 ? 's' : ''}
+                                </span>
+                              ) : isDuplicate ? (
+                                <span className="inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-50 text-amber-800 border border-amber-300 whitespace-nowrap">
+                                  <AlertCircle className="w-3 h-3 text-amber-600" />
+                                  Potential Duplicate
+                                </span>
+                              ) : (
+                                <span className="inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 whitespace-nowrap">
+                                  <CheckCircle2 className="w-3 h-3 text-emerald-600" />
+                                  Valid
+                                </span>
+                              )}
+                            </td>
+                            <td className="py-3 px-4 font-bold text-slate-900 max-w-[180px] truncate">
+                              {r.raw.title || <span className="text-red-500 font-normal italic">Missing Title</span>}
+                            </td>
+                            <td className="py-3 px-4 text-slate-600">
+                              {r.raw.employmentType || 'Full-Time'}
+                            </td>
+                            <td className="py-3 px-4 text-slate-600">
+                              {r.raw.workMode || 'Onsite'}
+                            </td>
+                            <td className="py-3 px-4 text-slate-600">
+                              {r.raw.city ? `${r.raw.city}, ${r.raw.state || r.raw.country || 'IN'}` : 'Bengaluru, IN'}
+                            </td>
+                            <td className="py-3 px-4 text-slate-600">
+                              {r.raw.experienceLevel === 'Fresher'
+                                ? 'Fresher'
+                                : r.raw.minExperience !== undefined
+                                ? `${r.raw.minExperience} - ${r.raw.maxExperience ?? r.raw.minExperience} yrs`
+                                : 'Experienced'}
+                            </td>
+                            <td className="py-3 px-4 text-slate-600 font-medium">
+                              {r.raw.minSalary ? formatCurrencyINR(r.raw.minSalary) : 'Negotiable'}
+                            </td>
+                            <td className="py-3 px-4 text-slate-500">
+                              {r.isValid ? (
+                                <span className="text-[11px] text-emerald-700">Ready to publish</span>
+                              ) : (
+                                <ul className="text-[11px] text-red-600 space-y-0.5 list-disc list-inside">
+                                  {r.errors.map((err, i) => (
+                                    <li key={i}>{err}</li>
+                                  ))}
+                                </ul>
+                              )}
+                            </td>
+                            <td className="py-3 px-4 text-right">
+                              <button
+                                type="button"
+                                onClick={() => toggleRowExpanded(r.rowNumber)}
+                                className="p-1 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-lg transition cursor-pointer"
+                                aria-label="Toggle details"
+                              >
+                                {isExpanded ? (
+                                  <ChevronUp className="w-4 h-4" />
                                 ) : (
-                                  <span className="inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 whitespace-nowrap">
-                                    <CheckCircle2 className="w-3 h-3 text-emerald-600" />
-                                    Valid
-                                  </span>
+                                  <ChevronDown className="w-4 h-4" />
                                 )}
-                              </td>
+                              </button>
+                            </td>
+                          </tr>
 
-                              {/* Details Toggle Chevron */}
-                              <td className="py-3.5 px-4 text-right">
-                                <button
-                                  type="button"
-                                  onClick={() => toggleRowExpanded(r.rowNumber)}
-                                  className="p-1 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-lg transition"
-                                  aria-label="Toggle details"
-                                >
-                                  {isExpanded ? (
-                                    <ChevronUp className="w-4 h-4" />
-                                  ) : (
-                                    <ChevronDown className="w-4 h-4" />
-                                  )}
-                                </button>
-                              </td>
-                            </tr>
-
-                            {/* Specific Red Validation Errors Below Row (Section 9, Figure Page 6) */}
-                            {!r.isValid && (
-                              <tr className="bg-red-50/40">
-                                <td colSpan={7} className="px-6 py-2 border-b border-red-100">
-                                  <ul className="text-[11px] text-red-600 space-y-0.5 list-disc list-inside">
-                                    {r.errors.map((err, i) => (
-                                      <li key={i}>{err}</li>
-                                    ))}
-                                  </ul>
-                                </td>
-                              </tr>
-                            )}
-
-                            {/* Expandable Details Drawer (Section 10) */}
-                            {isExpanded && (
-                              <tr className="bg-slate-50/60 border-b border-slate-200">
-                                <td colSpan={7} className="p-4 sm:p-5">
-                                  <div className="bg-white rounded-xl p-4 border border-slate-200 space-y-3 shadow-2xs">
-                                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
-                                      <div>
-                                        <p className="text-[10px] font-bold text-slate-400 uppercase">
-                                          Vacancies & Offices
-                                        </p>
-                                        <p className="font-semibold text-slate-800 mt-0.5">
-                                          {r.raw.vacancies ?? 1} Openings ({r.raw.officeCount ?? 1} Office{r.raw.officeCount !== 1 ? 's' : ''})
-                                        </p>
-                                      </div>
-
-                                      <div>
-                                        <p className="text-[10px] font-bold text-slate-400 uppercase">
-                                          Offered Salary
-                                        </p>
-                                        <p className="font-semibold text-slate-800 mt-0.5">
-                                          {r.raw.minSalary
-                                            ? `${formatCurrencyINR(r.raw.minSalary)} - ${formatCurrencyINR(r.raw.maxSalary ?? r.raw.minSalary)} (${r.raw.salaryCurrency || 'INR / Per Annum'})`
-                                            : 'Not Specified (Negotiable)'}
-                                        </p>
-                                      </div>
-
-                                      <div>
-                                        <p className="text-[10px] font-bold text-slate-400 uppercase">
-                                          Educational Qualification
-                                        </p>
-                                        <p className="font-semibold text-slate-800 mt-0.5 truncate">
-                                          {r.raw.educationalQualification || 'Any Graduate'}
-                                        </p>
-                                      </div>
+                          {/* Expandable Details Drawer */}
+                          {isExpanded && (
+                            <tr className="bg-slate-50/60 border-b border-slate-200">
+                              <td colSpan={10} className="p-4 sm:p-5">
+                                <div className="bg-white rounded-xl p-4 border border-slate-200 space-y-3 shadow-2xs">
+                                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+                                    <div>
+                                      <p className="text-[10px] font-bold text-slate-400 uppercase">
+                                        Vacancies & Offices
+                                      </p>
+                                      <p className="font-semibold text-slate-800 mt-0.5">
+                                        {r.raw.vacancies ?? 1} Openings ({r.raw.officeCount ?? 1} Office{r.raw.officeCount !== 1 ? 's' : ''})
+                                      </p>
                                     </div>
 
                                     <div>
-                                      <p className="text-[10px] font-bold text-slate-400 uppercase mb-1">
-                                        Required Skills
+                                      <p className="text-[10px] font-bold text-slate-400 uppercase">
+                                        Offered Salary
                                       </p>
-                                      <div className="flex flex-wrap gap-1.5">
-                                        {r.raw.skillsRequired
-                                          ? r.raw.skillsRequired.split(',').map((s, idx) => (
-                                              <span
-                                                key={idx}
-                                                className="text-[11px] px-2 py-0.5 rounded bg-teal-50 text-teal-700 font-medium border border-teal-200/60"
-                                              >
-                                                {s.trim()}
-                                              </span>
-                                            ))
-                                          : <span className="text-slate-400 text-xs italic">None specified</span>}
-                                      </div>
+                                      <p className="font-semibold text-slate-800 mt-0.5">
+                                        {r.raw.minSalary
+                                          ? `${formatCurrencyINR(r.raw.minSalary)} - ${formatCurrencyINR(r.raw.maxSalary ?? r.raw.minSalary)} (${r.raw.salaryCurrency || 'INR / Per Annum'})`
+                                          : 'Not Specified (Negotiable)'}
+                                      </p>
                                     </div>
 
-                                    {r.raw.jobDescription && (
-                                      <div>
-                                        <p className="text-[10px] font-bold text-slate-400 uppercase mb-0.5">
-                                          Job Description
-                                        </p>
-                                        <p className="text-xs text-slate-600 leading-relaxed whitespace-pre-wrap">
-                                          {r.raw.jobDescription}
-                                        </p>
-                                      </div>
-                                    )}
+                                    <div>
+                                      <p className="text-[10px] font-bold text-slate-400 uppercase">
+                                        Educational Qualification
+                                      </p>
+                                      <p className="font-semibold text-slate-800 mt-0.5 truncate">
+                                        {r.raw.educationalQualification || 'Any Graduate'}
+                                      </p>
+                                    </div>
                                   </div>
-                                </td>
-                              </tr>
-                            )}
-                          </React.Fragment>
-                        );
-                      })
-                    )}
-                  </tbody>
-                </table>
-              </div>
+
+                                  <div>
+                                    <p className="text-[10px] font-bold text-slate-400 uppercase mb-1">
+                                      Required Skills
+                                    </p>
+                                    <div className="flex flex-wrap gap-1.5">
+                                      {r.raw.skillsRequired
+                                        ? r.raw.skillsRequired.split(',').map((s, idx) => (
+                                            <span
+                                              key={idx}
+                                              className="text-[11px] px-2 py-0.5 rounded bg-teal-50 text-teal-700 font-medium border border-teal-200/60"
+                                            >
+                                              {s.trim()}
+                                            </span>
+                                          ))
+                                        : <span className="text-slate-400 text-xs italic">None specified</span>}
+                                    </div>
+                                  </div>
+
+                                  {r.raw.jobDescription && (
+                                    <div>
+                                      <p className="text-[10px] font-bold text-slate-400 uppercase mb-0.5">
+                                        Job Description
+                                      </p>
+                                      <p className="text-xs text-slate-600 leading-relaxed whitespace-pre-wrap">
+                                        {r.raw.jobDescription}
+                                      </p>
+                                    </div>
+                                  )}
+                                </div>
+                              </td>
+                            </tr>
+                          )}
+                        </React.Fragment>
+                      );
+                    })
+                  )}
+                </tbody>
+              </table>
             </div>
+          </div>
 
-            {/* Duplicate Warning Checkbox (Section 11, Figure 4) */}
-            {hasDuplicates && (
-              <div className="p-4 bg-slate-50 border border-slate-200 rounded-2xl flex items-center gap-3">
-                <input
-                  type="checkbox"
-                  id="confirm-duplicates-checkbox"
-                  checked={confirmDuplicates}
-                  onChange={(e) => setConfirmDuplicates(e.target.checked)}
-                  className="w-4 h-4 text-teal-600 rounded border-slate-300 focus:ring-teal-500 cursor-pointer"
-                />
-                <label
-                  htmlFor="confirm-duplicates-checkbox"
-                  className="text-xs font-semibold text-slate-800 cursor-pointer select-none"
-                >
-                  I confirm that I want to proceed and post potential duplicate jobs.
-                </label>
-              </div>
-            )}
-
-            {/* Action Bar (Upload Different File & Post Valid Jobs Button) */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-4 border-t border-slate-100">
-              <button
-                type="button"
-                onClick={handleReset}
-                disabled={publishing}
-                className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 text-xs font-bold text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 rounded-xl transition cursor-pointer"
+          {/* Duplicate Warning Checkbox */}
+          {hasDuplicates && (
+            <div className="p-3.5 bg-slate-50 border border-slate-200 rounded-2xl flex items-center gap-3">
+              <input
+                type="checkbox"
+                id="confirm-duplicates-checkbox"
+                checked={confirmDuplicates}
+                onChange={(e) => setConfirmDuplicates(e.target.checked)}
+                className="w-4 h-4 text-teal-600 rounded border-slate-300 focus:ring-teal-500 cursor-pointer"
+              />
+              <label
+                htmlFor="confirm-duplicates-checkbox"
+                className="text-xs font-semibold text-slate-800 cursor-pointer select-none"
               >
-                <RotateCcw className="w-3.5 h-3.5" />
-                <span>Upload Different File</span>
-              </button>
+                I confirm that I want to proceed and post potential duplicate jobs.
+              </label>
+            </div>
+          )}
 
+          {/* Action Bar */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-4 border-t border-slate-100">
+            <button
+              type="button"
+              onClick={handleReset}
+              disabled={publishing}
+              className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 text-xs font-bold text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 rounded-xl transition cursor-pointer"
+            >
+              <RotateCcw className="w-3.5 h-3.5" />
+              <span>Reset / Upload Different File</span>
+            </button>
+
+            <div className="flex items-center gap-3">
               <button
                 type="button"
                 onClick={handlePublish}
                 disabled={isPostButtonDisabled}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-2.5 text-xs font-bold text-white bg-teal-600 hover:bg-teal-700 active:bg-teal-800 disabled:opacity-40 disabled:cursor-not-allowed rounded-xl transition shadow-xs hover:shadow cursor-pointer"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-2.5 text-xs font-bold text-white bg-teal-600 hover:bg-teal-700 active:bg-teal-800 disabled:opacity-50 disabled:cursor-not-allowed rounded-xl transition shadow-xs hover:shadow cursor-pointer"
               >
                 {publishing ? (
                   <>
@@ -731,7 +722,7 @@ export const BulkJobUploadPage: React.FC = () => {
                 ) : (
                   <>
                     <Sparkles className="w-4 h-4" />
-                    <span>Post {validRows.length} Valid Job{validRows.length !== 1 ? 's' : ''}</span>
+                    <span>Publish {validRows.length} Valid Job{validRows.length !== 1 ? 's' : ''}</span>
                   </>
                 )}
               </button>
@@ -740,7 +731,7 @@ export const BulkJobUploadPage: React.FC = () => {
         </div>
       )}
 
-      {/* 5. Bulk Post Completed Confirmation Modal (Section 14, Figure 6) */}
+      {/* 5. Bulk Post Completed Confirmation Modal Dialog */}
       {publishResult && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-xs animate-in fade-in duration-200">
           <div className="relative bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-slate-200/90 text-center space-y-6 animate-in zoom-in-95 duration-200">
