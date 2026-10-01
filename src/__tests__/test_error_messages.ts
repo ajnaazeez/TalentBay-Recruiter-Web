@@ -56,17 +56,17 @@ const errorTestCases = [
   {
     name: '10. Network Error (auth/network-request-failed)',
     input: { code: 'auth/network-request-failed', message: 'A network error (such as timeout, interrupted connection or unreachable host) has occurred.' },
-    expected: 'Unable to create your account. Please check your internet connection and try again.',
+    expected: 'Network error occurred. Please check your internet connection and try again.',
   },
   {
     name: '11. Unknown / Internal Server Error (auth/internal-error)',
     input: { code: 'auth/internal-error', message: 'Internal error occurred.' },
-    expected: "We couldn't create your account right now. Please try again.",
+    expected: 'An unexpected error occurred. Please try again.',
   },
   {
     name: '12. Unhandled Technical Exception string',
     input: 'Firebase: Error (auth/something-random-12345)',
-    expected: "We couldn't create your account right now. Please try again.",
+    expected: 'An unexpected error occurred. Please try again.',
   },
   {
     name: '13. Pre-formatted custom error message pass-through',

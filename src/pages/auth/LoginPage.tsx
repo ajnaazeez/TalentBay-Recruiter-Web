@@ -96,9 +96,26 @@ export const LoginPage: React.FC = () => {
       setLoading(true);
 
       // Authoritative pre-check: verify active recruiter account exists before sending OTP
-      const checkResult = await functionsService.checkRecruiterPhoneForSignIn(fullPhoneNumber);
-      if (!checkResult.exists) {
-        setError(checkResult.message || 'No recruiter account found with this mobile number. Please create an account first.');
+      let exists = false;
+      try {
+        const checkResult = await functionsService.checkRecruiterPhoneForSignIn(fullPhoneNumber);
+        if (checkResult && checkResult.exists) {
+          exists = true;
+        }
+      } catch {
+        // ignore notice, proceed to fallback check
+      }
+
+      if (!exists) {
+        // Fallback to client-side Firestore lookup across phone variants
+        const matchedRec = await authService.findRecruiterByPhone(fullPhoneNumber);
+        if (matchedRec) {
+          exists = true;
+        }
+      }
+
+      if (!exists) {
+        setError('Please create an account first.');
         setLoading(false);
         return;
       }
@@ -168,7 +185,9 @@ export const LoginPage: React.FC = () => {
   const isNoAccountError = Boolean(
     error && (
       error.toLowerCase().includes('create an account first') ||
-      error.toLowerCase().includes('no recruiter account found')
+      error.toLowerCase().includes('no recruiter account found') ||
+      error.toLowerCase().includes('no recruiter profile found') ||
+      error.toLowerCase().includes('sign up to create')
     )
   );
 

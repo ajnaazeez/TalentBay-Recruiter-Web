@@ -17,7 +17,7 @@ export function formatAuthErrorMessage(err: unknown): string {
     return mapCodeOrMessage(code, msg);
   }
 
-  return "We couldn't create your account right now. Please try again.";
+  return 'An unexpected error occurred. Please try again.';
 }
 
 function mapCodeOrMessage(code: string, msg: string): string {
@@ -43,13 +43,19 @@ function mapCodeOrMessage(code: string, msg: string): string {
 
   // 2. Existing Account / Credential Collisions (Phone)
   if (
+    combined.includes('this phone number is already registered') ||
+    combined.includes('phone number is already registered')
+  ) {
+    return 'This phone number is already registered. Please sign in instead.';
+  }
+
+  if (
     combined.includes('auth/phone-number-already-exists') ||
     combined.includes('auth/phone-number-already-in-use') ||
     combined.includes('phone-number-already-exists') ||
     combined.includes('phone-number-already-in-use') ||
     combined.includes('auth/credential-already-in-use') ||
     combined.includes('credential-already-in-use') ||
-    combined.includes('phone number is already registered') ||
     combined.includes('already exists with this phone number')
   ) {
     return 'An account already exists with this phone number. Please sign in instead.';
@@ -139,6 +145,40 @@ function mapCodeOrMessage(code: string, msg: string): string {
     return 'This account has been disabled. Please contact support.';
   }
 
+  // 5b. Role Authorization Failures (Candidate & Recruiter Separation)
+  if (
+    combined.includes('auth/not-authorized-candidate') ||
+    combined.includes('not-authorized-candidate') ||
+    combined.includes('registered as a candidate')
+  ) {
+    return 'This account is registered as a candidate / job seeker. The Recruiter Portal requires a recruiter account. Please sign in with your recruiter credentials or register with your official work email.';
+  }
+
+  if (
+    combined.includes('auth/not-authorized-recruiter') ||
+    combined.includes('not-authorized-recruiter')
+  ) {
+    return 'This account is not authorized as a recruiter. Please sign in with an authorized recruiter account or contact support.';
+  }
+
+  // 5c. Orphan Account / Profile Missing in Firestore
+  if (
+    combined.includes('auth/no-recruiter-profile') ||
+    combined.includes('no-recruiter-profile') ||
+    combined.includes('no recruiter profile found')
+  ) {
+    return 'No recruiter profile found for this account. Please sign up to create your recruiter profile.';
+  }
+
+  // 5d. reCAPTCHA Domain Verification / Authorized Domains
+  if (
+    combined.includes('auth/captcha-check-failed') ||
+    combined.includes('captcha-check-failed') ||
+    combined.includes('hostname match not found')
+  ) {
+    return 'Domain verification failed (reCAPTCHA hostname check). Please verify that talentbayrecruiter.com is listed under Authorized Domains in Firebase Authentication Settings.';
+  }
+
   // 6. Phone Number Validation
   if (
     combined.includes('auth/invalid-phone-number') ||
@@ -190,7 +230,7 @@ function mapCodeOrMessage(code: string, msg: string): string {
     combined.includes('network error') ||
     combined.includes('networkrequestfailed')
   ) {
-    return 'Unable to create your account. Please check your internet connection and try again.';
+    return 'Network error occurred. Please check your internet connection and try again.';
   }
 
   // 11. Operation not allowed
@@ -207,7 +247,7 @@ function mapCodeOrMessage(code: string, msg: string): string {
     combined.includes('internal-error') ||
     combined.includes('auth/unknown')
   ) {
-    return "We couldn't create your account right now. Please try again.";
+    return 'An unexpected error occurred. Please try again.';
   }
 
   // 13. If code is empty and msg is already a clean human-readable sentence (not technical Firebase wrapper)
@@ -224,5 +264,5 @@ function mapCodeOrMessage(code: string, msg: string): string {
   }
 
   // 14. Fallback for Internal / Unknown Server Errors
-  return "We couldn't create your account right now. Please try again.";
+  return 'An unexpected error occurred. Please try again.';
 }

@@ -757,9 +757,75 @@ export const validateRecruiterRegistration = onCall(
 
     let phoneExists = false;
     let emailExists = false;
+    let isCandidate = false;
     let message = '';
 
-    // 1. Validate Phone Number across active recruiter accounts and auth users
+    // Authoritatively verifies whether a UID corresponds to an ACTIVE candidate account.
+    // In accordance with Business Rules:
+    // - CASE 3: Active candidate accounts must be blocked from the Recruiter Portal.
+    // - CASE 4: A deleted candidate account (where candidate Firestore document does not exist,
+    //   or where the candidate was deleted from Firebase Auth) must NOT permanently prevent that
+    //   email or phone from creating a new Recruiter account.
+    // - CASE 5: An orphan Auth user without an active candidate profile does NOT block recruiter registration.
+    const isCandidateActive = async (uid: string): Promise<boolean> => {
+      // 1. Candidate document in /candidates/{uid} must exist
+      const candDoc = await db.collection('candidates').doc(uid).get();
+      if (!candDoc.exists) {
+        return false;
+      }
+
+      const candData = candDoc.data() || {};
+      if (
+        candData.accountStatus === 'Deleted' ||
+        candData.isDeleted === true ||
+        candData.deleted === true
+      ) {
+        return false;
+      }
+
+      // 2. Firebase Auth user must exist for this candidate UID.
+      // If the Auth user was deleted, the candidate account was deleted/removed and cannot sign in.
+      try {
+        const authUser = await admin.auth().getUser(uid);
+        if (!authUser || authUser.disabled) {
+          return false;
+        }
+        return true;
+      } catch (err: any) {
+        if (err?.code === 'auth/user-not-found') {
+          return false;
+        }
+        // In case of other auth errors, check if candDoc has actual candidate content
+        const hasContent = Boolean(
+          candData.firstName ||
+          candData.email ||
+          (candData.profileCompletionPercentage && candData.profileCompletionPercentage > 0)
+        );
+        return hasContent;
+      }
+    };
+
+    // Authoritatively verifies whether a UID corresponds to an ACTIVE recruiter account.
+    const isRecruiterActive = async (uid: string): Promise<boolean> => {
+      // 1. Check /recruiters/{uid}
+      const recDoc = await db.collection('recruiters').doc(uid).get();
+      if (recDoc.exists) {
+        return true;
+      }
+
+      // 2. Check /users/{uid}
+      const userDoc = await db.collection('users').doc(uid).get();
+      if (userDoc.exists) {
+        const u = userDoc.data();
+        if (u?.role === 'recruiter' || u?.userType === 'recruiter') {
+          return true;
+        }
+      }
+
+      return false;
+    };
+
+    // 1. Validate Phone Number across active recruiter accounts, active candidates, and auth users
     if (rawPhone) {
       const cleanPhone = rawPhone.trim();
       const digitsOnly = cleanPhone.replace(/\D/g, '');
@@ -779,14 +845,23 @@ export const validateRecruiterRegistration = onCall(
 
       for (const variant of searchVariants) {
         // A. Check Firebase Auth by phone number
-        try {
-          const authUser = await admin.auth().getUserByPhoneNumber(variant);
-          if (authUser && (!excludeUid || authUser.uid !== excludeUid)) {
-            phoneExists = true;
-            break;
+        if (variant.startsWith('+')) {
+          try {
+            const authUser = await admin.auth().getUserByPhoneNumber(variant);
+            if (authUser && (!excludeUid || authUser.uid !== excludeUid)) {
+              if (await isRecruiterActive(authUser.uid)) {
+                phoneExists = true;
+                break;
+              } else if (await isCandidateActive(authUser.uid)) {
+                phoneExists = true;
+                isCandidate = true;
+                break;
+              }
+              // Orphan Auth user without recruiter/candidate profile in Firestore does not block
+            }
+          } catch {
+            // not found in auth
           }
-        } catch {
-          // not found in auth
         }
 
         // B. Check /recruiters by phoneNumber
@@ -814,9 +889,17 @@ export const validateRecruiterRegistration = onCall(
         for (const doc of usersSnap.docs) {
           if (!excludeUid || doc.id !== excludeUid) {
             const u = doc.data();
-            if (u.role === 'recruiter' || u.userType === 'recruiter' || !u.role) {
-              phoneExists = true;
-              break;
+            if (u.role === 'recruiter' || u.userType === 'recruiter') {
+              if (await isRecruiterActive(doc.id)) {
+                phoneExists = true;
+                break;
+              }
+            } else if (u.role === 'candidate' || u.userType === 'candidate') {
+              if (await isCandidateActive(doc.id)) {
+                phoneExists = true;
+                isCandidate = true;
+                break;
+              }
             }
           }
         }
@@ -827,21 +910,47 @@ export const validateRecruiterRegistration = onCall(
         for (const doc of usersSnap2.docs) {
           if (!excludeUid || doc.id !== excludeUid) {
             const u = doc.data();
-            if (u.role === 'recruiter' || u.userType === 'recruiter' || !u.role) {
-              phoneExists = true;
-              break;
+            if (u.role === 'recruiter' || u.userType === 'recruiter') {
+              if (await isRecruiterActive(doc.id)) {
+                phoneExists = true;
+                break;
+              }
+            } else if (u.role === 'candidate' || u.userType === 'candidate') {
+              if (await isCandidateActive(doc.id)) {
+                phoneExists = true;
+                isCandidate = true;
+                break;
+              }
             }
           }
         }
         if (phoneExists) break;
 
         // F. Check /candidates by phoneNumber
-        const candSnap = await db.collection('candidates').where('phoneNumber', '==', variant).limit(1).get();
+        const candSnap = await db.collection('candidates').where('phoneNumber', '==', variant).limit(5).get();
         if (!candSnap.empty) {
           for (const doc of candSnap.docs) {
             if (!excludeUid || doc.id !== excludeUid) {
-              phoneExists = true;
-              break;
+              if (await isCandidateActive(doc.id)) {
+                phoneExists = true;
+                isCandidate = true;
+                break;
+              }
+            }
+          }
+        }
+        if (phoneExists) break;
+
+        // G. Check /candidates by phone
+        const candSnap2 = await db.collection('candidates').where('phone', '==', variant).limit(5).get();
+        if (!candSnap2.empty) {
+          for (const doc of candSnap2.docs) {
+            if (!excludeUid || doc.id !== excludeUid) {
+              if (await isCandidateActive(doc.id)) {
+                phoneExists = true;
+                isCandidate = true;
+                break;
+              }
             }
           }
         }
@@ -849,30 +958,25 @@ export const validateRecruiterRegistration = onCall(
       }
     }
 
-    // 2. Validate Email across active recruiter accounts, users, and auth
+    // 2. Validate Email across active recruiter accounts, active candidates, users, and auth
     if (cleanEmail) {
       // A. Check Firebase Auth by email
       try {
         const authUser = await admin.auth().getUserByEmail(cleanEmail);
         if (authUser && (!excludeUid || authUser.uid !== excludeUid)) {
-          emailExists = true;
+          if (await isRecruiterActive(authUser.uid)) {
+            emailExists = true;
+          } else if (await isCandidateActive(authUser.uid)) {
+            emailExists = true;
+            isCandidate = true;
+          }
+          // Orphan Auth user without recruiter/candidate profile in Firestore does not block
         }
       } catch {
         // not found in auth
       }
 
-      // B. Check /users by email
-      if (!emailExists) {
-        const usersEmailSnap = await db.collection('users').where('email', '==', cleanEmail).get();
-        for (const doc of usersEmailSnap.docs) {
-          if (!excludeUid || doc.id !== excludeUid) {
-            emailExists = true;
-            break;
-          }
-        }
-      }
-
-      // C. Check /recruiters by officialEmail
+      // B. Check /recruiters by officialEmail
       if (!emailExists) {
         const recEmailSnap = await db.collection('recruiters').where('officialEmail', '==', cleanEmail).get();
         for (const doc of recEmailSnap.docs) {
@@ -883,7 +987,7 @@ export const validateRecruiterRegistration = onCall(
         }
       }
 
-      // D. Check /recruiters by email
+      // C. Check /recruiters by email
       if (!emailExists) {
         const recEmailSnap2 = await db.collection('recruiters').where('email', '==', cleanEmail).get();
         for (const doc of recEmailSnap2.docs) {
@@ -893,9 +997,53 @@ export const validateRecruiterRegistration = onCall(
           }
         }
       }
+
+      // D. Check /users by email
+      if (!emailExists) {
+        const usersEmailSnap = await db.collection('users').where('email', '==', cleanEmail).get();
+        for (const doc of usersEmailSnap.docs) {
+          if (!excludeUid || doc.id !== excludeUid) {
+            const u = doc.data();
+            if (u.role === 'recruiter' || u.userType === 'recruiter') {
+              if (await isRecruiterActive(doc.id)) {
+                emailExists = true;
+                break;
+              }
+            } else if (u.role === 'candidate' || u.userType === 'candidate') {
+              if (await isCandidateActive(doc.id)) {
+                emailExists = true;
+                isCandidate = true;
+                break;
+              }
+            }
+          }
+        }
+      }
+
+      // E. Check /candidates by email
+      if (!emailExists) {
+        const candEmailSnap = await db.collection('candidates').where('email', '==', cleanEmail).limit(5).get();
+        for (const doc of candEmailSnap.docs) {
+          if (!excludeUid || doc.id !== excludeUid) {
+            if (await isCandidateActive(doc.id)) {
+              emailExists = true;
+              isCandidate = true;
+              break;
+            }
+          }
+        }
+      }
     }
 
-    if (phoneExists && emailExists) {
+    if (isCandidate) {
+      if (emailExists && phoneExists) {
+        message = 'This email and phone number are already registered as a candidate/job seeker account. Candidate accounts cannot be used on the Recruiter Portal. Please use your official recruiter work details.';
+      } else if (emailExists) {
+        message = 'This email address is already registered as a candidate/job seeker account. Candidate accounts cannot be used on the Recruiter Portal. Please use a different work email address.';
+      } else {
+        message = 'This phone number is already registered as a candidate/job seeker account. Candidate accounts cannot be used on the Recruiter Portal.';
+      }
+    } else if (phoneExists && emailExists) {
       message = 'An account already exists with this email address or phone number. Please sign in instead.';
     } else if (phoneExists) {
       message = 'This phone number is already registered. Please sign in instead.';
@@ -906,6 +1054,7 @@ export const validateRecruiterRegistration = onCall(
     return {
       phoneExists,
       emailExists,
+      isCandidate,
       valid: !phoneExists && !emailExists,
       message,
     };
@@ -1214,41 +1363,15 @@ export const checkRecruiterPhoneForSignIn = onCall(
       // 1. Check /recruiters
       const recSnap = await db.collection('recruiters').where('phoneNumber', '==', variant).get();
       if (!recSnap.empty) {
-        for (const doc of recSnap.docs) {
-          const d = doc.data();
-          const rawCompId = String(d.companyId || d.company_id || '').trim();
-          if (rawCompId) {
-            const compDoc = await db.collection('companies').doc(rawCompId).get();
-            if (compDoc.exists) {
-              foundRecruiter = true;
-              break;
-            }
-          } else {
-            foundRecruiter = true;
-            break;
-          }
-        }
+        foundRecruiter = true;
+        break;
       }
-      if (foundRecruiter) break;
 
       const recSnap2 = await db.collection('recruiters').where('phone', '==', variant).get();
       if (!recSnap2.empty) {
-        for (const doc of recSnap2.docs) {
-          const d = doc.data();
-          const rawCompId = String(d.companyId || d.company_id || '').trim();
-          if (rawCompId) {
-            const compDoc = await db.collection('companies').doc(rawCompId).get();
-            if (compDoc.exists) {
-              foundRecruiter = true;
-              break;
-            }
-          } else {
-            foundRecruiter = true;
-            break;
-          }
-        }
+        foundRecruiter = true;
+        break;
       }
-      if (foundRecruiter) break;
 
       // 2. Check /users
       const usersSnap = await db.collection('users').where('phoneNumber', '==', variant).get();

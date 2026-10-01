@@ -101,7 +101,7 @@ export const authService = {
 
     if (candDocSnap && candDocSnap.exists()) {
       await firebaseSignOut(auth);
-      const err = new Error('This account is registered as a candidate. User is invalid in this application.');
+      const err = new Error('This account is registered as a candidate. Please use a recruiter account to access the recruiter portal.');
       (err as { code?: string }).code = 'auth/not-authorized-candidate';
       throw err;
     }
@@ -112,17 +112,51 @@ export const authService = {
     if (hasUserDoc) {
       const userData = userDocSnap.data();
       const userType = userData.role || userData.userType;
+      if (userType === 'candidate') {
+        await firebaseSignOut(auth);
+        const err = new Error('This account is registered as a candidate. Please use a recruiter account to access the recruiter portal.');
+        (err as { code?: string }).code = 'auth/not-authorized-candidate';
+        throw err;
+      }
       if (userType && userType !== 'recruiter' && userType !== 'admin') {
         await firebaseSignOut(auth);
         const err = new Error('This account is not authorized as a recruiter. User is invalid in this application.');
         (err as { code?: string }).code = 'auth/not-authorized-recruiter';
         throw err;
       }
+
+      // Self-heal: If /users/{uid} exists with role: 'recruiter' but /recruiters/{uid} is missing, recreate it
+      if (!hasRecDoc && (userType === 'recruiter' || userType === 'admin')) {
+        try {
+          const rawCompanyId = userData.companyId || userData.company_id || `${Date.now()}`;
+          const companyId = String(rawCompanyId).trim();
+          await setDoc(doc(db, COLLECTIONS.RECRUITERS, user.uid), {
+            uid: user.uid,
+            companyId,
+            fullName: String(userData.fullName || userData.displayName || user.displayName || 'Recruiter'),
+            officialEmail: cleanEmail,
+            email: cleanEmail,
+            phoneNumber: userData.phoneNumber || userData.phone || null,
+            phone: userData.phoneNumber || userData.phone || null,
+            designation: userData.designation || 'Recruiter Lead',
+            emailVerified: Boolean(user.emailVerified),
+            phoneVerified: Boolean(userData.phoneNumber || userData.phone),
+            isSubscribed: false,
+            isSubscriptionCancelled: false,
+            subscriptionPlanId: null,
+            subscriptionExpiry: null,
+            createdAt: userData.createdAt || serverTimestamp(),
+            updatedAt: serverTimestamp(),
+          }, { merge: true });
+        } catch (healErr) {
+          console.warn('[authService.signIn] Notice self-healing /recruiters document:', healErr);
+        }
+      }
     } else if (!hasRecDoc) {
-      // Neither /users/{uid} nor /recruiters/{uid} exists as an active recruiter
+      // Neither /users/{uid} nor /recruiters/{uid} exists as an active recruiter (orphan Firebase Auth account)
       await firebaseSignOut(auth);
-      const err = new Error('No recruiter account found with this email. Please create an account first.');
-      (err as { code?: string }).code = 'auth/user-not-found';
+      const err = new Error('No recruiter profile found for this account. Please sign up to create your recruiter profile.');
+      (err as { code?: string }).code = 'auth/no-recruiter-profile';
       throw err;
     }
 
@@ -373,41 +407,95 @@ export const authService = {
       phoneNumber: normalizedPhone,
     });
 
-    if (val.emailExists && val.phoneExists) {
-      const err = new Error('An account already exists with this email address or phone number. Please sign in instead.');
-      (err as { code?: string }).code = 'auth/email-and-phone-already-in-use';
-      throw err;
-    }
-
-    if (val.emailExists) {
-      const err = new Error('An account already exists with this email address. Please sign in instead.');
-      (err as { code?: string }).code = 'auth/email-already-in-use';
-      throw err;
-    }
-
-    if (val.phoneExists) {
-      const err = new Error('This phone number is already registered. Please sign in instead.');
-      (err as { code?: string }).code = 'auth/phone-number-already-exists';
+    if (!val.valid) {
+      if (val.isCandidate) {
+        const err = new Error(val.message || 'This email address is already registered as a candidate account. Candidate accounts cannot be used on the Recruiter Portal.');
+        (err as { code?: string }).code = 'auth/not-authorized-candidate';
+        throw err;
+      }
+      if (val.emailExists && val.phoneExists) {
+        const err = new Error(val.message || 'An account already exists with this email address or phone number. Please sign in instead.');
+        (err as { code?: string }).code = 'auth/email-and-phone-already-in-use';
+        throw err;
+      }
+      if (val.emailExists) {
+        const err = new Error(val.message || 'An account already exists with this email address. Please sign in instead.');
+        (err as { code?: string }).code = 'auth/email-already-in-use';
+        throw err;
+      }
+      if (val.phoneExists) {
+        const err = new Error(val.message || 'This phone number is already registered. Please sign in instead.');
+        (err as { code?: string }).code = 'auth/phone-number-already-exists';
+        throw err;
+      }
+      const err = new Error(val.message || 'Validation failed. Please verify your details.');
+      (err as { code?: string }).code = 'auth/validation-failed';
       throw err;
     }
 
     // 3. Create Auth User
-    let userCredential;
+    let userCredential: { user: User };
     try {
       userCredential = await createUserWithEmailAndPassword(auth, cleanEmail, password);
     } catch (authErr: unknown) {
       if ((authErr as { code?: string })?.code === 'auth/email-already-in-use') {
-        const phoneAlsoExists = normalizedPhone ? await this.checkPhoneExists(normalizedPhone) : false;
-        if (phoneAlsoExists) {
-          const err = new Error('An account already exists with this email address or phone number. Please sign in instead.');
-          (err as { code?: string }).code = 'auth/email-and-phone-already-in-use';
+        // Handle orphan Firebase Auth user (e.g. account profile was deleted from Firestore)
+        let existingUser: User | null = null;
+        try {
+          const cred = await firebaseSignIn(auth, cleanEmail, password);
+          existingUser = cred.user;
+        } catch {
+          // Password doesn't match or invalid credential
+        }
+
+        if (existingUser) {
+          const [recDocSnap, userDocSnap, candDocSnap] = await Promise.all([
+            getDoc(doc(db, COLLECTIONS.RECRUITERS, existingUser.uid)).catch(() => null),
+            getDoc(doc(db, COLLECTIONS.USERS, existingUser.uid)).catch(() => null),
+            getDoc(doc(db, COLLECTIONS.CANDIDATES, existingUser.uid)).catch(() => null),
+          ]);
+
+          if (candDocSnap && candDocSnap.exists()) {
+            await firebaseSignOut(auth).catch(() => {});
+            const err = new Error('This email address is already registered as a candidate account. Candidate accounts cannot be used on the Recruiter Portal.');
+            (err as { code?: string }).code = 'auth/not-authorized-candidate';
+            throw err;
+          }
+
+          const hasRec = recDocSnap && recDocSnap.exists();
+          const hasRecUser = userDocSnap && userDocSnap.exists() && (userDocSnap.data()?.role === 'recruiter' || userDocSnap.data()?.userType === 'recruiter');
+
+          if (hasRec || hasRecUser) {
+            await firebaseSignOut(auth).catch(() => {});
+            const phoneAlsoExists = normalizedPhone ? await this.checkPhoneExists(normalizedPhone) : false;
+            if (phoneAlsoExists) {
+              const err = new Error('An account already exists with this email address or phone number. Please sign in instead.');
+              (err as { code?: string }).code = 'auth/email-and-phone-already-in-use';
+              throw err;
+            }
+            const err = new Error('An account already exists with this email address. Please sign in instead.');
+            (err as { code?: string }).code = 'auth/email-already-in-use';
+            throw err;
+          }
+
+          // Neither recruiter nor candidate profile exists in Firestore (orphan Auth user whose recruiter profile was deleted).
+          // Allow registration to proceed and provision the recruiter profile for this user.
+          console.log('[authService.signUpRecruiter] Resolving orphan Auth user to create recruiter profile:', existingUser.uid);
+          userCredential = { user: existingUser };
+        } else {
+          const phoneAlsoExists = normalizedPhone ? await this.checkPhoneExists(normalizedPhone) : false;
+          if (phoneAlsoExists) {
+            const err = new Error('An account already exists with this email address or phone number. Please sign in instead.');
+            (err as { code?: string }).code = 'auth/email-and-phone-already-in-use';
+            throw err;
+          }
+          const err = new Error('An account already exists with this email address. Please sign in instead.');
+          (err as { code?: string }).code = 'auth/email-already-in-use';
           throw err;
         }
-        const err = new Error('An account already exists with this email address. Please sign in instead.');
-        (err as { code?: string }).code = 'auth/email-already-in-use';
-        throw err;
+      } else {
+        throw authErr;
       }
-      throw authErr;
     }
 
     const user = userCredential.user;
@@ -660,7 +748,7 @@ export const authService = {
         } catch {
           // ignore
         }
-        await firebaseSignOut(auth).catch(() => {});
+        await firebaseSignOut(auth).catch(() => { });
         const err = new Error('This account is registered as a candidate. User is invalid in this application.');
         (err as { code?: string }).code = 'auth/not-authorized-candidate';
         throw err;
@@ -677,7 +765,7 @@ export const authService = {
         } catch {
           // ignore
         }
-        await firebaseSignOut(auth).catch(() => {});
+        await firebaseSignOut(auth).catch(() => { });
         const err = new Error('No recruiter account found with this mobile number. Please create an account first.');
         (err as { code?: string }).code = 'auth/recruiter-not-found';
         throw err;
@@ -1074,7 +1162,7 @@ export const authService = {
       }
     }
 
-    await firebaseSignOut(auth).catch(() => {});
+    await firebaseSignOut(auth).catch(() => { });
   },
 
   /**

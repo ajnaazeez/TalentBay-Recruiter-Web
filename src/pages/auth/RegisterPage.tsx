@@ -34,8 +34,15 @@ export const RegisterPage: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const isExistingAccountError = Boolean(
+  const isCandidateError = Boolean(
     error && (
+      error.toLowerCase().includes('candidate') ||
+      error.toLowerCase().includes('job seeker')
+    )
+  );
+
+  const isExistingAccountError = Boolean(
+    error && !isCandidateError && (
       error.toLowerCase().includes('already exists') ||
       error.toLowerCase().includes('already associated') ||
       error.toLowerCase().includes('already in use') ||

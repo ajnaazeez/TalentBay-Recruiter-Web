@@ -186,13 +186,14 @@ export const functionsService = {
   }): Promise<{
     phoneExists: boolean;
     emailExists: boolean;
+    isCandidate?: boolean;
     valid: boolean;
     message?: string;
   }> {
     try {
       const fn = httpsCallable<
         { email?: string; phoneNumber?: string; excludeUid?: string },
-        { phoneExists: boolean; emailExists: boolean; valid: boolean; message?: string }
+        { phoneExists: boolean; emailExists: boolean; isCandidate?: boolean; valid: boolean; message?: string }
       >(functions, 'validateRecruiterRegistration');
       const result = await fn(params);
       if (!result?.data) {
